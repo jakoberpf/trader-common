@@ -1,0 +1,6 @@
+.project
+.classpath
+trader-domain.iml
+.idea
+.settings
+target
