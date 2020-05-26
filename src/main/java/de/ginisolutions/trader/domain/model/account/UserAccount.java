@@ -74,7 +74,7 @@ public class UserAccount implements Serializable {
     public int hashCode() {
         return 31;
     }
-    
+
     @Override
     public String toString() {
         return "UserAccount{" +
