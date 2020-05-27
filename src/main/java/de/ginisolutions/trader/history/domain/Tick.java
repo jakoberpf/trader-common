@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.domain.model.history;
+package de.ginisolutions.trader.history.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;

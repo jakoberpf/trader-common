@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.domain.model.history;
+package de.ginisolutions.trader.history.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.ginisolutions.trader.domain.enumeration.SYMBOL;
+import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
 
 /**
  * The Stock entity.\n@author A true hipster

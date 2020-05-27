@@ -1,7 +1,7 @@
-package de.ginisolutions.trader.domain.enumeration;
+package de.ginisolutions.trader.history.domain.enumeration;
 
-import static de.ginisolutions.trader.domain.enumeration.CURRENCY.*;
-import static de.ginisolutions.trader.domain.enumeration.CURRENCY.LTC;
+import static de.ginisolutions.trader.history.domain.enumeration.CURRENCY.*;
+import static de.ginisolutions.trader.history.domain.enumeration.CURRENCY.LTC;
 
 /**
  * The Symbol enumeration.

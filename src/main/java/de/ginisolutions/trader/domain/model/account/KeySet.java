@@ -1,7 +1,7 @@
 package de.ginisolutions.trader.domain.model.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import de.ginisolutions.trader.domain.enumeration.MARKET;
+import de.ginisolutions.trader.history.domain.enumeration.MARKET;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;

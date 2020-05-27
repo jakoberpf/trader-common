@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.domain.enumeration;
+package de.ginisolutions.trader.history.domain.enumeration;
 
 /**
  * The Interval enumeration.

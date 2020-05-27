@@ -1,6 +1,6 @@
-package de.ginisolutions.trader.domain.model.history;
+package de.ginisolutions.trader.history.domain;
 
-import de.ginisolutions.trader.domain.enumeration.MARKET;
+import de.ginisolutions.trader.history.domain.enumeration.MARKET;
 import io.swagger.annotations.ApiModel;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
