@@ -46,7 +46,6 @@ public class Stock implements Serializable {
     @JsonIgnoreProperties(value = "stocks", allowSetters = true)
     private Market market;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
         return id;
     }
@@ -131,7 +130,6 @@ public class Stock implements Serializable {
     public void setMarket(Market market) {
         this.market = market;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {

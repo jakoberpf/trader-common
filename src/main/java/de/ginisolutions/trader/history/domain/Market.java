@@ -39,7 +39,6 @@ public class Market implements Serializable {
     @Field("stock")
     private Set<Stock> stocks = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
         return id;
     }

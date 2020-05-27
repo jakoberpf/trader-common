@@ -52,7 +52,6 @@ public class Tick implements Serializable {
     @JsonIgnoreProperties(value = "ticks", allowSetters = true)
     private Stock stock;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
         return id;
     }
