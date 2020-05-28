@@ -1,5 +1,7 @@
 package de.ginisolutions.trader.trading.domain;
 
+import de.ginisolutions.trader.history.domain.enumeration.MARKET;
+import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -28,6 +30,14 @@ public class Trader implements Serializable {
     private String owner;
 
     @NotNull
+    @Field("market")
+    private MARKET market;
+
+    @NotNull
+    @Field("symbol")
+    private SYMBOL symbol;
+
+    @NotNull
     @Field("api_key")
     private String apiKey;
 
@@ -36,8 +46,16 @@ public class Trader implements Serializable {
     private String apiSecret;
 
     @NotNull
-    @Field("attributes")
-    private String attributes;
+    @Field("is_live")
+    private Boolean isLive;
+
+    @NotNull
+    @Field("is_in")
+    private Boolean isIn;
+
+    @NotNull
+    @Field("budget")
+    private Double budget;
 
     // TODO implement trading history Map<enum(enter/exit),amount>
 
@@ -75,6 +93,32 @@ public class Trader implements Serializable {
         this.owner = owner;
     }
 
+    public MARKET getMarket() {
+        return market;
+    }
+
+    public Trader market(MARKET market) {
+        this.market = market;
+        return this;
+    }
+
+    public void setMarket(MARKET market) {
+        this.market = market;
+    }
+
+    public SYMBOL getSymbol() {
+        return symbol;
+    }
+
+    public Trader symbol(SYMBOL symbol) {
+        this.symbol = symbol;
+        return this;
+    }
+
+    public void setSymbol(SYMBOL symbol) {
+        this.symbol = symbol;
+    }
+
     public String getApiKey() {
         return apiKey;
     }
@@ -101,17 +145,43 @@ public class Trader implements Serializable {
         this.apiSecret = apiSecret;
     }
 
-    public String getAttributes() {
-        return attributes;
+    public Boolean isIsLive() {
+        return isLive;
     }
 
-    public Trader attributes(String attributes) {
-        this.attributes = attributes;
+    public Trader isLive(Boolean isLive) {
+        this.isLive = isLive;
         return this;
     }
 
-    public void setAttributes(String attributes) {
-        this.attributes = attributes;
+    public void setIsLive(Boolean isLive) {
+        this.isLive = isLive;
+    }
+
+    public Boolean isIsIn() {
+        return isIn;
+    }
+
+    public Trader isIn(Boolean isIn) {
+        this.isIn = isIn;
+        return this;
+    }
+
+    public void setIsIn(Boolean isIn) {
+        this.isIn = isIn;
+    }
+
+    public Double getBudget() {
+        return budget;
+    }
+
+    public Trader budget(Double budget) {
+        this.budget = budget;
+        return this;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
     }
 
     @Override
@@ -137,9 +207,13 @@ public class Trader implements Serializable {
                 "id=" + getId() +
                 ", name='" + getName() + "'" +
                 ", owner='" + getOwner() + "'" +
+                ", market='" + getMarket() + "'" +
+                ", symbol='" + getSymbol() + "'" +
                 ", apiKey='" + getApiKey() + "'" +
                 ", apiSecret='" + getApiSecret() + "'" +
-                ", attributes='" + getAttributes() + "'" +
+                ", isLive='" + isIsLive() + "'" +
+                ", isIn='" + isIsIn() + "'" +
+                ", budget=" + getBudget() +
                 "}";
     }
 }

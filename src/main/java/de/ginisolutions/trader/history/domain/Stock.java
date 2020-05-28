@@ -113,5 +113,21 @@ public class Stock implements Serializable {
     public void setMarket(Market market) {
         this.market = market;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Stock)) {
+            return false;
+        }
+        return id != null && id.equals(((Stock) o).id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 }
 
