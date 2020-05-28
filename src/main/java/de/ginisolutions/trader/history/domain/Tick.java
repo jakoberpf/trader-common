@@ -29,28 +29,40 @@ public class Tick implements Serializable {
 
     @NotNull
     @Field("open")
-    private Float open;
+    private Double open;
 
     @NotNull
     @Field("close")
-    private Float close;
+    private Double close;
 
     @NotNull
     @Field("high")
-    private Float high;
+    private Double high;
 
     @NotNull
     @Field("low")
-    private Float low;
+    private Double low;
 
     @NotNull
     @Field("volume")
-    private Float volume;
+    private Double volume;
 
     @DBRef
     @Field("stock")
     @JsonIgnoreProperties(value = "ticks", allowSetters = true)
     private Stock stock;
+
+    public Tick() {
+    }
+
+    public Tick(@NotNull Long timestamp, @NotNull Double open, @NotNull Double close, @NotNull Double high, @NotNull Double low, @NotNull Double volume) {
+        this.timestamp = timestamp;
+        this.open = open;
+        this.close = close;
+        this.high = high;
+        this.low = low;
+        this.volume = volume;
+    }
 
     public String getId() {
         return id;
@@ -73,68 +85,68 @@ public class Tick implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public Float getOpen() {
+    public Double getOpen() {
         return open;
     }
 
-    public Tick open(Float open) {
+    public Tick open(Double open) {
         this.open = open;
         return this;
     }
 
-    public void setOpen(Float open) {
+    public void setOpen(Double open) {
         this.open = open;
     }
 
-    public Float getClose() {
+    public Double getClose() {
         return close;
     }
 
-    public Tick close(Float close) {
+    public Tick close(Double close) {
         this.close = close;
         return this;
     }
 
-    public void setClose(Float close) {
+    public void setClose(Double close) {
         this.close = close;
     }
 
-    public Float getHigh() {
+    public Double getHigh() {
         return high;
     }
 
-    public Tick high(Float high) {
+    public Tick high(Double high) {
         this.high = high;
         return this;
     }
 
-    public void setHigh(Float high) {
+    public void setHigh(Double high) {
         this.high = high;
     }
 
-    public Float getLow() {
+    public Double getLow() {
         return low;
     }
 
-    public Tick low(Float low) {
+    public Tick low(Double low) {
         this.low = low;
         return this;
     }
 
-    public void setLow(Float low) {
+    public void setLow(Double low) {
         this.low = low;
     }
 
-    public Float getVolume() {
+    public Double getVolume() {
         return volume;
     }
 
-    public Tick volume(Float volume) {
+    public Tick volume(Double volume) {
         this.volume = volume;
         return this;
     }
 
-    public void setVolume(Float volume) {
+    public void setVolume(Double volume) {
         this.volume = volume;
     }
 

@@ -1,5 +1,7 @@
 package de.ginisolutions.trader.history.domain.enumeration;
 
+import java.util.Currency;
+
 import static de.ginisolutions.trader.history.domain.enumeration.CURRENCY.*;
 import static de.ginisolutions.trader.history.domain.enumeration.CURRENCY.LTC;
 
@@ -7,6 +9,7 @@ import static de.ginisolutions.trader.history.domain.enumeration.CURRENCY.LTC;
  * The Symbol enumeration.
  */
 public enum SYMBOL {
+    SAMPLE_ENUM("sample", "SAMPLE", CURRENCY.SAMPLE_ENUM, CURRENCY.SAMPLE_ENUM, "sample description"),
     /**
      * Crypto Symbols
      */
@@ -58,7 +61,7 @@ public enum SYMBOL {
 
     @Override
     public String toString() {
-        return "Symbol{" +
+        return "SYMBOL{" +
                 "nameLower='" + nameLower + '\'' +
                 ", nameUpper='" + nameUpper + '\'' +
                 ", asset=" + asset +

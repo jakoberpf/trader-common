@@ -7,8 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,12 +25,6 @@ public class Market implements Serializable {
     private String id;
 
     @NotNull
-    @Field("name")
-    private String name;
-
-    @Field("description")
-    private String description;
-
     @Field("market")
     private MARKET market;
 
@@ -39,38 +32,19 @@ public class Market implements Serializable {
     @Field("stock")
     private Set<Stock> stocks = new HashSet<>();
 
+    public Market() {
+    }
+
+    public Market(@NotNull MARKET market) {
+        this.market = market;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Market name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Market description(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public MARKET getMarket() {
@@ -131,8 +105,6 @@ public class Market implements Serializable {
     public String toString() {
         return "Market{" +
                 "id=" + getId() +
-                ", name='" + getName() + "'" +
-                ", description='" + getDescription() + "'" +
                 ", market='" + getMarket() + "'" +
                 "}";
     }

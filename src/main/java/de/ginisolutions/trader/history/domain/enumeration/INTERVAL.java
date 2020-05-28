@@ -1,33 +1,49 @@
 package de.ginisolutions.trader.history.domain.enumeration;
 
+import com.binance.api.client.domain.market.CandlestickInterval;
+
 /**
  * The Interval enumeration.
  */
 public enum INTERVAL {
-    ONE_MINUTE(60000L),
-    THREE_MINUTES(180000L),
-    FIVE_MINUTES(300000L),
-    FIFTEEN_MINUTES(900000L),
-    HALF_HOURLY(1800000L),
-    HOURLY(3600000L),
-    TWO_HOURLY(7200000L),
-    FOUR_HOURLY(14400000L),
-    SIX_HOURLY(21600000L),
-    EIGHT_HOURLY(28800000L),
-    TWELVE_HOURLY(43200000L),
-    DAILY(86400000L),
-    THREE_DAILY(259200000L),
-    WEEKLY(604800000L),
-    MONTHLY(2592000000L);
+    ONE_MINUTE(60000L, CandlestickInterval.ONE_MINUTE, 1),
+    THREE_MINUTES(180000L, CandlestickInterval.THREE_MINUTES, null),
+    FIVE_MINUTES(300000L, CandlestickInterval.FIVE_MINUTES, null),
+    FIFTEEN_MINUTES(900000L, CandlestickInterval.FIFTEEN_MINUTES, null),
+    HALF_HOURLY(1800000L, CandlestickInterval.HALF_HOURLY, 30),
+    HOURLY(3600000L, CandlestickInterval.HOURLY, 60),
+    TWO_HOURLY(7200000L, CandlestickInterval.TWO_HOURLY, null),
+    FOUR_HOURLY(14400000L, CandlestickInterval.FOUR_HOURLY, null),
+    SIX_HOURLY(21600000L, CandlestickInterval.SIX_HOURLY, null),
+    EIGHT_HOURLY(28800000L, CandlestickInterval.EIGHT_HOURLY, null),
+    TWELVE_HOURLY(43200000L, CandlestickInterval.TWELVE_HOURLY, null),
+    DAILY(86400000L, CandlestickInterval.DAILY, 1440),
+    THREE_DAILY(259200000L, CandlestickInterval.THREE_DAILY, null),
+    WEEKLY(604800000L, CandlestickInterval.WEEKLY, null),
+    MONTHLY(2592000000L, CandlestickInterval.MONTHLY, null);
 
     private final Long interval;
 
-    INTERVAL(Long interval) {
+    private final CandlestickInterval binanceInterval;
+
+    private final Integer cryptoInterval;
+
+    INTERVAL(Long interval, CandlestickInterval binanceInterval, Integer cryptoInterval) {
         this.interval = interval;
+        this.binanceInterval = binanceInterval;
+        this.cryptoInterval = cryptoInterval;
     }
 
     public Long getInterval() {
         return interval;
+    }
+
+    public CandlestickInterval getBinanceInterval() {
+        return binanceInterval;
+    }
+
+    public Integer getCryptoInterval() {
+        return cryptoInterval;
     }
 
     public static INTERVAL of(Long millis) {

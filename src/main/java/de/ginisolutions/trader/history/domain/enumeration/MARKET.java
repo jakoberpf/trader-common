@@ -1,6 +1,7 @@
 package de.ginisolutions.trader.history.domain.enumeration;
 
 public enum MARKET {
+    SAMPLE_ENUM("Sample","sample.com","api.sample.com"),
     /**
      * Crypto Markets/Exchanges
      */

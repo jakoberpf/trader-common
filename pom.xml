@@ -6,7 +6,7 @@
 
     <groupId>de.ginisolutions.trader.domain</groupId>
     <artifactId>trader-domain</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Trader Domain</name>
 
@@ -39,6 +39,28 @@
             <artifactId>swagger-annotations</artifactId>
             <version>1.6.0</version>
         </dependency>
+        <!--MBassador for Asynchronous Internal Messaging-->
+        <dependency>
+            <groupId>net.engio</groupId>
+            <artifactId>mbassador</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <!--MBassador for Asynchronous Internal Messaging-->
+        <!--Trading Algorithm Dependency-->
+        <dependency>
+            <groupId>org.ta4j</groupId>
+            <artifactId>ta4j-core</artifactId>
+            <version>0.13</version>
+        </dependency>
+        <!--Trading Algorithm Dependency-->
+        <!--Market APIs-->
+        <dependency>
+            <groupId>com.binance.api</groupId>
+            <artifactId>binance-api-client</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <!--Market APIs-->
+
     </dependencies>
 
     <build>
