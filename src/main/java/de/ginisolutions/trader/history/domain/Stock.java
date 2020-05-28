@@ -27,15 +27,11 @@ public class Stock implements Serializable {
     private String id;
 
     @NotNull
-    @Field("name")
-    private String name;
+    @Field("symbol")
+    private SYMBOL symbol;
 
     @Field("description")
     private String description;
-
-    @NotNull
-    @Field("symbol")
-    private SYMBOL symbol;
 
     @DBRef
     @Field("tick")
@@ -54,17 +50,17 @@ public class Stock implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public SYMBOL getSymbol() {
+        return symbol;
     }
 
-    public Stock name(String name) {
-        this.name = name;
+    public Stock symbol(SYMBOL symbol) {
+        this.symbol = symbol;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSymbol(SYMBOL symbol) {
+        this.symbol = symbol;
     }
 
     public String getDescription() {
@@ -78,19 +74,6 @@ public class Stock implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public SYMBOL getSymbol() {
-        return symbol;
-    }
-
-    public Stock symbol(SYMBOL symbol) {
-        this.symbol = symbol;
-        return this;
-    }
-
-    public void setSymbol(SYMBOL symbol) {
-        this.symbol = symbol;
     }
 
     public Set<Tick> getTicks() {
@@ -129,33 +112,6 @@ public class Stock implements Serializable {
 
     public void setMarket(Market market) {
         this.market = market;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Stock)) {
-            return false;
-        }
-        return id != null && id.equals(((Stock) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "Stock{" +
-                "id=" + getId() +
-                ", name='" + getName() + "'" +
-                ", description='" + getDescription() + "'" +
-                ", symbol='" + getSymbol() + "'" +
-                "}";
     }
 }
 

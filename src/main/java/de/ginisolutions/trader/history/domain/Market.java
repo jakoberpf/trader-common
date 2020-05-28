@@ -28,6 +28,10 @@ public class Market implements Serializable {
     @Field("market")
     private MARKET market;
 
+    @NotNull
+    @Field("description")
+    private String description;
+
     @DBRef
     @Field("stock")
     private Set<Stock> stocks = new HashSet<>();
@@ -35,8 +39,9 @@ public class Market implements Serializable {
     public Market() {
     }
 
-    public Market(@NotNull MARKET market) {
+    public Market(@NotNull MARKET market, @NotNull String description) {
         this.market = market;
+        this.description = description;
     }
 
     public String getId() {
@@ -58,6 +63,19 @@ public class Market implements Serializable {
 
     public void setMarket(MARKET market) {
         this.market = market;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Market description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Stock> getStocks() {
@@ -83,30 +101,6 @@ public class Market implements Serializable {
 
     public void setStocks(Set<Stock> stocks) {
         this.stocks = stocks;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Market)) {
-            return false;
-        }
-        return id != null && id.equals(((Market) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
-    }
-
-    @Override
-    public String toString() {
-        return "Market{" +
-                "id=" + getId() +
-                ", market='" + getMarket() + "'" +
-                "}";
     }
 }
 

@@ -58,15 +58,4 @@ public enum SYMBOL {
     public String getDescription() {
         return description;
     }
-
-    @Override
-    public String toString() {
-        return "SYMBOL{" +
-                "nameLower='" + nameLower + '\'' +
-                ", nameUpper='" + nameUpper + '\'' +
-                ", asset=" + asset +
-                ", base=" + base +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }
