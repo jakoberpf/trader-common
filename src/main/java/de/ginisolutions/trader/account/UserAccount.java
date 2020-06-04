@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.domain.model.account;
+package de.ginisolutions.trader.account;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

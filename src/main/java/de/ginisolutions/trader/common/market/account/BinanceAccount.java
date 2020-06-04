@@ -6,6 +6,7 @@ import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.Trade;
 import de.ginisolutions.trader.common.market.AccountImpl;
 import de.ginisolutions.trader.history.domain.enumeration.MARKET;
+import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,9 @@ import static com.binance.api.client.domain.account.NewOrder.marketBuy;
 import static com.binance.api.client.domain.account.NewOrder.marketSell;
 import static de.ginisolutions.trader.history.domain.enumeration.MARKET.BINANCE;
 
+/**
+ * TODO
+ */
 public class BinanceAccount implements AccountImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(BinanceAccount.class);
@@ -90,14 +94,19 @@ public class BinanceAccount implements AccountImpl {
 //        return accountBalance;
 //    }
 
-//    public void makeOrder(MarketEnum marketEnum, double amount, String buyOrSell) {
-//        // Placing a test MARKET order
-//        if (buyOrSell.equals("buy")) {
-//            client.newOrder(marketBuy(marketEnum.getBinanceID(), String.valueOf(amount)));
-//        } else if (buyOrSell.equals("sell")) {
-//            client.newOrder(marketSell(marketEnum.getBinanceID(), String.valueOf(amount)));
-//        } else {
-//            throw new IllegalArgumentException("Argument " + buyOrSell + " is not 'buy' or 'sell'");
-//        }
-//    }
+    /**
+     * TODO
+     * @param market
+     * @param amount
+     * @param buyOrSell
+     */
+    public void makeOrder(SYMBOL market, double amount, String buyOrSell) {
+        if (buyOrSell.equals("buy")) {
+            client.newOrder(marketBuy(market.getNameLower(), String.valueOf(amount)));
+        } else if (buyOrSell.equals("sell")) {
+            client.newOrder(marketSell(market.getNameLower(), String.valueOf(amount)));
+        } else {
+            throw new IllegalArgumentException("Argument " + buyOrSell + " is not 'buy' or 'sell'");
+        }
+    }
 }

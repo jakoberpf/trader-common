@@ -1,6 +1,5 @@
-package de.ginisolutions.trader.history.broker;
+package de.ginisolutions.trader.common.messaging;
 
-import de.ginisolutions.trader.history.domain.Tick;
 import de.ginisolutions.trader.history.domain.TickDTO;
 import net.engio.mbassy.bus.MBassador;
 import net.engio.mbassy.bus.config.IBusConfiguration;
@@ -27,6 +26,14 @@ public class TickPublisher {
     }
 
     /**
+     * This method subscribes the provided listener to the event bus
+     * @param listener defines the listener to subscribe to the event bus
+     */
+    public void subscribe(TickListener listener) {
+        this.bus.subscribe(listener);
+    }
+
+    /**
      * @param tick
      * @param aync
      * @return
@@ -37,7 +44,6 @@ public class TickPublisher {
         } else {
             this.publishTick(tick);
         }
-
         return true;
     }
 

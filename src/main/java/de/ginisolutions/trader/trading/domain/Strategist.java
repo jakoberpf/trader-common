@@ -1,8 +1,9 @@
 package de.ginisolutions.trader.trading.domain;
 
+import de.ginisolutions.trader.common.strategy.parameter.StrategyParameter;
 import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
 import de.ginisolutions.trader.history.domain.enumeration.MARKET;
-import de.ginisolutions.trader.history.domain.enumeration.STRATEGY;
+import de.ginisolutions.trader.trading.domain.enumeration.STRATEGY;
 import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -32,6 +33,20 @@ public class Strategist implements Serializable {
 
     @Field("interval")
     private INTERVAL interval;
+
+    @Field("parameters")
+    private StrategyParameter parameters;
+
+    public Strategist() {
+    }
+
+    public Strategist(STRATEGY strategy, MARKET market, SYMBOL symbol, INTERVAL interval, StrategyParameter parameters) {
+        this.strategy = strategy;
+        this.market = market;
+        this.symbol = symbol;
+        this.interval = interval;
+        this.parameters = parameters;
+    }
 
     public String getId() {
         return id;
@@ -93,6 +108,19 @@ public class Strategist implements Serializable {
         this.interval = interval;
     }
 
+    public StrategyParameter getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(StrategyParameter parameters) {
+        this.parameters = parameters;
+    }
+
+    public Strategist parameters(StrategyParameter parameters) {
+        this.parameters = parameters;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -112,11 +140,12 @@ public class Strategist implements Serializable {
     @Override
     public String toString() {
         return "Strategist{" +
-            "id=" + getId() +
-            ", strategy='" + getStrategy() + "'" +
-            ", market='" + getMarket() + "'" +
-            ", symbol='" + getSymbol() + "'" +
-            ", interval='" + getInterval() + "'" +
-            "}";
+                "id='" + id + '\'' +
+                ", strategy=" + strategy +
+                ", market=" + market +
+                ", symbol=" + symbol +
+                ", interval=" + interval +
+                ", parameters=" + parameters +
+                '}';
     }
 }

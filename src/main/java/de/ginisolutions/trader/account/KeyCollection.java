@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.domain.model.account;
+package de.ginisolutions.trader.account;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.annotation.Id;

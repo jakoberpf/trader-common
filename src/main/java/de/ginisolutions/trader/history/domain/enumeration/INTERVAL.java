@@ -6,7 +6,7 @@ import com.binance.api.client.domain.market.CandlestickInterval;
  * The Interval enumeration.
  */
 public enum INTERVAL {
-    SAMPLE_ENUM(1L, null, 1),
+    SAMPLE_SYMBOL(1L, null, 1),
     ONE_MINUTE(60000L, CandlestickInterval.ONE_MINUTE, 1),
     THREE_MINUTES(180000L, CandlestickInterval.THREE_MINUTES, null),
     FIVE_MINUTES(300000L, CandlestickInterval.FIVE_MINUTES, null),

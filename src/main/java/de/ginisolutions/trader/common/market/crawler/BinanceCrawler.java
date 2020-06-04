@@ -4,8 +4,9 @@ import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.event.CandlestickEvent;
 import de.ginisolutions.trader.common.market.CrawlerImpl;
-import de.ginisolutions.trader.history.broker.TickListener;
-import de.ginisolutions.trader.history.broker.TickPublisher;
+import de.ginisolutions.trader.common.messaging.BaseListener;
+import de.ginisolutions.trader.common.messaging.TickListener;
+import de.ginisolutions.trader.common.messaging.TickPublisher;
 import de.ginisolutions.trader.history.domain.TickDTO;
 import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
 import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
@@ -29,12 +30,15 @@ public class BinanceCrawler implements CrawlerImpl {
 
     private final TickPublisher publisher;
 
-    public BinanceCrawler(SYMBOL symbol, INTERVAL interval, TickListener listener) {
+    public BinanceCrawler(SYMBOL symbol, INTERVAL interval, BaseListener listener) {
         this.symbol = symbol;
         this.interval = interval;
-        this.publisher = new TickPublisher(listener);
+        this.publisher = new TickPublisher((TickListener) listener);
     }
 
+    /**
+     * TODO
+     */
     @Override
     public void run() {
         logger.debug("Subscribing to Binance.com " + this.symbol.getNameLower() + " with interval of millis " + interval.getInterval());
@@ -58,5 +62,10 @@ public class BinanceCrawler implements CrawlerImpl {
             this.publisher.publishTick(tickDTO, false);
             logger.debug(tickDTO.toString());
         });
+    }
+
+    @Override
+    public void subscribe(BaseListener listener) {
+        this.publisher.subscribe((TickListener) listener);
     }
 }
