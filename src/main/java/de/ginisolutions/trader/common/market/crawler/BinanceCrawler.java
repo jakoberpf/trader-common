@@ -4,14 +4,17 @@ import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.BinanceApiWebSocketClient;
 import com.binance.api.client.domain.event.CandlestickEvent;
 import de.ginisolutions.trader.common.market.CrawlerImpl;
-import de.ginisolutions.trader.common.messaging.BaseListener;
 import de.ginisolutions.trader.common.messaging.TickListener;
 import de.ginisolutions.trader.common.messaging.TickPublisher;
 import de.ginisolutions.trader.history.domain.TickDTO;
 import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
+import de.ginisolutions.trader.history.domain.enumeration.MARKET;
 import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.Closeable;
+import java.io.IOException;
 
 import static de.ginisolutions.trader.history.domain.enumeration.MARKET.BINANCE;
 
@@ -20,9 +23,11 @@ import static de.ginisolutions.trader.history.domain.enumeration.MARKET.BINANCE;
  */
 public class BinanceCrawler implements CrawlerImpl {
 
-    private static final Logger logger = LoggerFactory.getLogger(BinanceCrawler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BinanceCrawler.class);
 
     private static final BinanceApiWebSocketClient webSocket = BinanceApiClientFactory.newInstance().newWebSocketClient();
+
+    private static final MARKET market = BINANCE;
 
     private final SYMBOL symbol;
 
@@ -30,10 +35,13 @@ public class BinanceCrawler implements CrawlerImpl {
 
     private final TickPublisher publisher;
 
-    public BinanceCrawler(SYMBOL symbol, INTERVAL interval, BaseListener listener) {
+    private Closeable closeable;
+
+    public BinanceCrawler(SYMBOL symbol, INTERVAL interval, TickListener listener) {
         this.symbol = symbol;
         this.interval = interval;
-        this.publisher = new TickPublisher((TickListener) listener);
+        this.publisher = new TickPublisher();
+        this.publisher.subscribe(listener);
     }
 
     /**
@@ -41,12 +49,12 @@ public class BinanceCrawler implements CrawlerImpl {
      */
     @Override
     public void run() {
-        logger.debug("Subscribing to Binance.com " + this.symbol.getNameLower() + " with interval of millis " + interval.getInterval());
+        LOGGER.debug("Subscribing to Binance.com " + this.symbol.getNameLower() + " with interval of millis " + interval.getInterval());
         // Obtain candlesticks in real-time
-        webSocket.onCandlestickEvent(symbol.getNameLower(), interval.getBinanceInterval(), (CandlestickEvent event) -> {
-            logger.debug(event.toString());
+        this.closeable = webSocket.onCandlestickEvent(symbol.getNameLower(), interval.getBinanceInterval(), (CandlestickEvent event) -> {
+            LOGGER.debug(event.toString());
             final TickDTO tickDTO = new TickDTO(
-                    BINANCE,
+                    market,
                     symbol,
                     interval,
                     event.getEventTime(),
@@ -59,13 +67,26 @@ public class BinanceCrawler implements CrawlerImpl {
                     Double.valueOf(event.getVolume()),
                     event.getBarFinal()
             );
-            this.publisher.publishTick(tickDTO, false);
-            logger.debug(tickDTO.toString());
+            this.publisher.publishTick(tickDTO);
+            LOGGER.debug(tickDTO.toString());
         });
     }
 
     @Override
-    public void subscribe(BaseListener listener) {
-        this.publisher.subscribe((TickListener) listener);
+    public void close() {
+        try {
+            this.closeable.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param listener
+     */
+    @Override
+    public void subscribe(TickListener listener) {
+        LOGGER.debug("Subscribing new listener: " + listener);
+        this.publisher.subscribe(listener);
     }
 }

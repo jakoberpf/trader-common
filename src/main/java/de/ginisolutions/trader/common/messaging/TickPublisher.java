@@ -1,28 +1,25 @@
 package de.ginisolutions.trader.common.messaging;
 
 import de.ginisolutions.trader.history.domain.TickDTO;
+import net.engio.mbassy.bus.IMessagePublication;
 import net.engio.mbassy.bus.MBassador;
-import net.engio.mbassy.bus.config.IBusConfiguration;
+import net.engio.mbassy.bus.error.IPublicationErrorHandler;
+import net.engio.mbassy.bus.error.PublicationError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  *
  */
-public class TickPublisher {
+public class TickPublisher implements IPublicationErrorHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TickPublisher.class);
 
     private final MBassador<TickDTO> bus;
 
-    /**
-     * @param listener
-     */
-    public TickPublisher(TickListener listener) {
+    public TickPublisher() {
         LOGGER.info("Constructing TickPublisher");
-        IBusConfiguration configuration;
         this.bus = new MBassador<>();
-        this.bus.subscribe(listener);
     }
 
     /**
@@ -35,24 +32,27 @@ public class TickPublisher {
 
     /**
      * @param tick
-     * @param aync
+     * @param async
      * @return
      */
-    public boolean publishTick(TickDTO tick, boolean aync) {
-        if (aync) {
-            this.bus.post(tick).asynchronously();
+    public IMessagePublication publishTick(TickDTO tick, boolean async) {
+        if (async) {
+            return this.bus.post(tick).asynchronously();
         } else {
-            this.publishTick(tick);
+            return this.publishTick(tick);
         }
-        return true;
     }
 
     /**
      * @param tick
      * @return
      */
-    public boolean publishTick(TickDTO tick) {
-        this.bus.post(tick).now();
-        return true;
+    public IMessagePublication publishTick(TickDTO tick) {
+        return this.bus.post(tick).now();
+    }
+
+    @Override
+    public void handleError(PublicationError error) {
+        LOGGER.error(error.getMessage());
     }
 }

@@ -1,6 +1,8 @@
 package de.ginisolutions.trader.common.strategy.parameter;
 
 import de.ginisolutions.trader.trading.domain.enumeration.STRATEGY;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotBlank;
 
@@ -111,5 +113,37 @@ public class ParameterMovingMomentum implements StrategyParameter {
                 ", EMAbars=" + EMAbars +
                 ", threshold=" + threshold +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof ParameterMovingMomentum)) return false;
+
+        ParameterMovingMomentum that = (ParameterMovingMomentum) o;
+
+        return new EqualsBuilder()
+                .append(getShortEmaBars(), that.getShortEmaBars())
+                .append(getLongEmaBars(), that.getLongEmaBars())
+                .append(getOscillatorBars(), that.getOscillatorBars())
+                .append(getMACDshortBars(), that.getMACDshortBars())
+                .append(getMACDlongBars(), that.getMACDlongBars())
+                .append(getEMAbars(), that.getEMAbars())
+                .append(getThreshold(), that.getThreshold())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getShortEmaBars())
+                .append(getLongEmaBars())
+                .append(getOscillatorBars())
+                .append(getMACDshortBars())
+                .append(getMACDlongBars())
+                .append(getEMAbars())
+                .append(getThreshold())
+                .toHashCode();
     }
 }

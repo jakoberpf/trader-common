@@ -1,6 +1,8 @@
 package de.ginisolutions.trader.common.strategy.parameter;
 
 import de.ginisolutions.trader.trading.domain.enumeration.STRATEGY;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotBlank;
 
@@ -86,5 +88,33 @@ public class ParameterCommodityChannelIndex implements StrategyParameter {
                 ", minus=" + minus +
                 ", unstablePeriod=" + unstablePeriod +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof ParameterCommodityChannelIndex)) return false;
+
+        ParameterCommodityChannelIndex that = (ParameterCommodityChannelIndex) o;
+
+        return new EqualsBuilder()
+                .append(getCCIlong(), that.getCCIlong())
+                .append(getCCIshort(), that.getCCIshort())
+                .append(getPlus(), that.getPlus())
+                .append(getMinus(), that.getMinus())
+                .append(getUnstablePeriod(), that.getUnstablePeriod())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getCCIlong())
+                .append(getCCIshort())
+                .append(getPlus())
+                .append(getMinus())
+                .append(getUnstablePeriod())
+                .toHashCode();
     }
 }

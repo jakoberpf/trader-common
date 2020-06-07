@@ -15,7 +15,7 @@ public class TickDTO {
     @NotNull
     private final INTERVAL interval;
     @NotNull
-    private final Long eventTime;
+    private final Long eventTime; // Time of tick event publication
     @NotNull
     private final Long openTime;
     @NotNull
@@ -94,6 +94,24 @@ public class TickDTO {
 
     public boolean isFinal() {
         return isFinal;
+    }
+
+    @Override
+    public String toString() {
+        return "TickDTO{" +
+                "market=" + market +
+                ", symbol=" + symbol +
+                ", interval=" + interval +
+                ", eventTime=" + eventTime +
+                ", openTime=" + openTime +
+                ", closeTime=" + closeTime +
+                ", open=" + open +
+                ", close=" + close +
+                ", high=" + high +
+                ", low=" + low +
+                ", volume=" + volume +
+                ", isFinal=" + isFinal +
+                '}';
     }
 }
 

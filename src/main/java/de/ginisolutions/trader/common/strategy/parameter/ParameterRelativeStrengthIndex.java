@@ -1,6 +1,8 @@
 package de.ginisolutions.trader.common.strategy.parameter;
 
 import de.ginisolutions.trader.trading.domain.enumeration.STRATEGY;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotBlank;
 
@@ -86,5 +88,33 @@ public class ParameterRelativeStrengthIndex implements StrategyParameter {
                 ", CdownIthreshold=" + cdownIthreshold +
                 ", CupIthreshold=" + cupIthreshold +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof ParameterRelativeStrengthIndex)) return false;
+
+        ParameterRelativeStrengthIndex that = (ParameterRelativeStrengthIndex) o;
+
+        return new EqualsBuilder()
+                .append(getSMAshortBars(), that.getSMAshortBars())
+                .append(getSMAlongBars(), that.getSMAlongBars())
+                .append(getRSIbars(), that.getRSIbars())
+                .append(getCdownIthreshold(), that.getCdownIthreshold())
+                .append(getCupIthreshold(), that.getCupIthreshold())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getSMAshortBars())
+                .append(getSMAlongBars())
+                .append(getRSIbars())
+                .append(getCdownIthreshold())
+                .append(getCupIthreshold())
+                .toHashCode();
     }
 }

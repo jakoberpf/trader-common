@@ -83,7 +83,7 @@ public class BinanceMarket implements MarketImpl {
      */
     @Override
     public List<TickDTO> getCandlesticks(@NotNull SYMBOL symbol, @NotNull INTERVAL interval) {
-        List<Candlestick> candlesticks = client.getCandlestickBars(symbol.getNameLower(), interval.getBinanceInterval());
+        List<Candlestick> candlesticks = client.getCandlestickBars(symbol.getNameUpper(), interval.getBinanceInterval());
         List<TickDTO> ticks = new ArrayList<>();
         for (Candlestick stick : candlesticks) {
             ticks.add(TickConverter.entity2dto(stick, BINANCE, symbol, interval, true));
