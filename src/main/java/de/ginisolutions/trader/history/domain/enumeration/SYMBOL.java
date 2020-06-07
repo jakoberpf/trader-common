@@ -9,7 +9,6 @@ import static de.ginisolutions.trader.history.domain.enumeration.CURRENCY.LTC;
  * The Symbol enumeration.
  */
 public enum SYMBOL {
-    SAMPLE_SYMBOL("sample", "SAMPLE", CURRENCY.SAMPLE_ENUM, CURRENCY.SAMPLE_ENUM, "sample description"),
     /**
      * Crypto Symbols
      */

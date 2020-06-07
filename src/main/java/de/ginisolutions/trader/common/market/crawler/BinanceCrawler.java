@@ -49,10 +49,10 @@ public class BinanceCrawler implements CrawlerImpl {
      */
     @Override
     public void run() {
-        LOGGER.debug("Subscribing to Binance.com " + this.symbol.getNameLower() + " with interval of millis " + interval.getInterval());
+        LOGGER.debug("Subscribing to {} {} {}", market, this.symbol, this.interval);
         // Obtain candlesticks in real-time
         this.closeable = webSocket.onCandlestickEvent(symbol.getNameLower(), interval.getBinanceInterval(), (CandlestickEvent event) -> {
-            LOGGER.debug(event.toString());
+            LOGGER.debug("New Tick {}", event.toString());
             final TickDTO tickDTO = new TickDTO(
                     market,
                     symbol,
@@ -86,7 +86,7 @@ public class BinanceCrawler implements CrawlerImpl {
      */
     @Override
     public void subscribe(TickListener listener) {
-        LOGGER.debug("Subscribing new listener: " + listener);
+        LOGGER.debug("Subscribing new listener: {}", listener);
         this.publisher.subscribe(listener);
     }
 }

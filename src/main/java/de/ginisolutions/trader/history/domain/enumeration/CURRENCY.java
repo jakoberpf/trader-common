@@ -1,7 +1,6 @@
 package de.ginisolutions.trader.history.domain.enumeration;
 
 public enum CURRENCY {
-    SAMPLE_ENUM,
     /**
      * Real Currencies
      */

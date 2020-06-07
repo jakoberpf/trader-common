@@ -3,6 +3,7 @@ package de.ginisolutions.trader.common.market.account;
 import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.domain.account.Account;
+import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.Trade;
 import de.ginisolutions.trader.common.market.AccountImpl;
 import de.ginisolutions.trader.history.domain.enumeration.MARKET;
@@ -70,11 +71,11 @@ public class BinanceAccount implements AccountImpl {
 //        System.out.println(newOrderResponse);
     }
 
-//    public void getTrades(MarketEnum marketEnum) {
-//        // Get list of trades
-//        List<Trade> myTrades = client.getMyTrades(marketEnum.getBinanceID());
-//        System.out.println(myTrades);
-//    }
+    public void getTrades(SYMBOL symbol) {
+        // Get list of trades
+        List<Trade> myTrades = client.getMyTrades(symbol.getNameLower());
+        System.out.println(myTrades);
+    }
 //
 //    public AccountBalance getBalance() {
 //        // Get account balances
@@ -96,15 +97,17 @@ public class BinanceAccount implements AccountImpl {
 
     /**
      * TODO
-     * @param market
+     * @param symbol
      * @param amount
      * @param buyOrSell
      */
-    public void makeOrder(SYMBOL market, double amount, String buyOrSell) {
+    public void makeOrder(SYMBOL symbol, double amount, String buyOrSell) {
         if (buyOrSell.equals("buy")) {
-            client.newOrder(marketBuy(market.getNameLower(), String.valueOf(amount)));
+            final NewOrderResponse orderResponse = client.newOrder(marketBuy(symbol.getNameLower(), String.valueOf(amount)));
+            System.out.println(orderResponse.toString());
         } else if (buyOrSell.equals("sell")) {
-            client.newOrder(marketSell(market.getNameLower(), String.valueOf(amount)));
+            final NewOrderResponse orderResponse = client.newOrder(marketSell(symbol.getNameLower(), String.valueOf(amount)));
+            System.out.println(orderResponse.toString());
         } else {
             throw new IllegalArgumentException("Argument " + buyOrSell + " is not 'buy' or 'sell'");
         }

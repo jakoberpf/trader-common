@@ -1,7 +1,6 @@
 package de.ginisolutions.trader.common.market;
 
 import de.ginisolutions.trader.common.market.account.BinanceAccount;
-import de.ginisolutions.trader.common.market.account.SampleAccount;
 import de.ginisolutions.trader.history.domain.enumeration.MARKET;
 import org.apache.commons.lang3.NotImplementedException;
 
@@ -14,8 +13,6 @@ public class AccountImplFactory {
                 throw new NotImplementedException("Not implemented " + market.getName());
             case COMDIRECT:
                 throw new NotImplementedException("Not implemented " + market.getName());
-            case SAMPLE_ENUM:
-                return new SampleAccount(key, secret);
             default:
                 throw new IllegalArgumentException("Illegal input in Exchange Factory -> " + market.getName());
         }
