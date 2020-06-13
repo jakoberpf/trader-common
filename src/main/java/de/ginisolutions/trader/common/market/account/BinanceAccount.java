@@ -8,6 +8,7 @@ import com.binance.api.client.domain.account.Trade;
 import de.ginisolutions.trader.common.market.AccountImpl;
 import de.ginisolutions.trader.history.domain.enumeration.MARKET;
 import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
+import de.ginisolutions.trader.trading.domain.enumeration.ORDER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,8 @@ import static de.ginisolutions.trader.history.domain.enumeration.MARKET.BINANCE;
 public class BinanceAccount implements AccountImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(BinanceAccount.class);
-    private static final MARKET exchange = BINANCE;
+
+    private static final MARKET market = BINANCE;
 
     private final BinanceApiRestClient client;
 
@@ -99,17 +101,57 @@ public class BinanceAccount implements AccountImpl {
      * TODO
      * @param symbol
      * @param amount
-     * @param buyOrSell
+     * @param order
      */
-    public void makeOrder(SYMBOL symbol, double amount, String buyOrSell) {
-        if (buyOrSell.equals("buy")) {
-            final NewOrderResponse orderResponse = client.newOrder(marketBuy(symbol.getNameLower(), String.valueOf(amount)));
-            System.out.println(orderResponse.toString());
-        } else if (buyOrSell.equals("sell")) {
-            final NewOrderResponse orderResponse = client.newOrder(marketSell(symbol.getNameLower(), String.valueOf(amount)));
-            System.out.println(orderResponse.toString());
-        } else {
-            throw new IllegalArgumentException("Argument " + buyOrSell + " is not 'buy' or 'sell'");
+    public void makeOrder(SYMBOL symbol, double amount, ORDER order) {
+        final NewOrderResponse orderResponse;
+        switch (order) {
+            case BUY:
+                orderResponse = client.newOrder(marketBuy(symbol.getNameUpper(), doubleToString(amount)));
+                System.out.println(orderResponse.toString());
+                break;
+            case SELL:
+                orderResponse = client.newOrder(marketSell(symbol.getNameUpper(), doubleToString(amount)));
+                System.out.println(orderResponse.toString());
+                break;
+            default:
+                throw new IllegalArgumentException("Argument " + order + " is not 'BUY' or 'SELL'");
         }
+    }
+
+    /**
+     *
+     * @param symbol
+     * @param amount
+     * @param order
+     * @param isTest
+     */
+    public void makeOrder(SYMBOL symbol, double amount, ORDER order, boolean isTest) {
+        if (isTest) {
+            switch (order) {
+                case BUY:
+                    client.newOrderTest(marketBuy(symbol.getNameUpper(), doubleToString(amount)));
+                    break;
+                case SELL:
+                    client.newOrderTest(marketSell(symbol.getNameUpper(), doubleToString(amount)));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Argument " + order + " is not 'BUY' or 'SELL'");
+            }
+        } else {
+            this.makeOrder(symbol, amount, order);
+        }
+    }
+
+    /**
+     *
+     * @param number is the double value to convert to string
+     * @return
+     */
+    private String doubleToString(double number) {
+        final String doubleAsString = String.format("%.3f", number);
+        final String doubleAsStringWithDot = doubleAsString.replace(',', '.');
+        System.out.println(doubleAsStringWithDot);
+        return doubleAsStringWithDot;
     }
 }
