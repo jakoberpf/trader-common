@@ -26,14 +26,14 @@ public class RelativeStrengthIndexStrategy {
 
     private static final Logger logger = LoggerFactory.getLogger(RelativeStrengthIndexStrategy.class);
 
-    public static Strategy buildStrategy(BarSeries series, ParameterRelativeStrengthIndex parameterRelativeStrengthIndex) {
-        logger.info("Building Relative Strength Index Strategy");
+    public static Strategy buildStrategy(BarSeries barSeries, ParameterRelativeStrengthIndex parameterRelativeStrengthIndex) {
+        logger.debug("Building Relative Strength Index Strategy {}", parameterRelativeStrengthIndex);
 
-        if (series == null) {
+        if (barSeries == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
 
-        ClosePriceIndicator closePrice = new ClosePriceIndicator(series);
+        ClosePriceIndicator closePrice = new ClosePriceIndicator(barSeries);
         SMAIndicator shortSma = new SMAIndicator(closePrice, parameterRelativeStrengthIndex.getSMAshortBars());
         SMAIndicator longSma = new SMAIndicator(closePrice, parameterRelativeStrengthIndex.getSMAlongBars());
 
@@ -53,7 +53,7 @@ public class RelativeStrengthIndexStrategy {
                 .and(new CrossedUpIndicatorRule(rsi, parameterRelativeStrengthIndex.getCupIthreshold())) // Signal 1
                 .and(new UnderIndicatorRule(shortSma, closePrice)); // Signal 2
 
-        logger.info("Building Relative Strength Index Strategy");
+        logger.debug("Finished building Relative Strength Index Strategy {}", parameterRelativeStrengthIndex);
         return new BaseStrategy(entryRule, exitRule);
     }
 }

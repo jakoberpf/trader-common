@@ -1,7 +1,7 @@
 package de.ginisolutions.trader.common.market.crawler;
 
 import de.ginisolutions.trader.common.messaging.TickListener;
-import de.ginisolutions.trader.history.domain.TickDTO;
+import de.ginisolutions.trader.history.domain.TickPackage;
 import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
 import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
 import net.engio.mbassy.listener.Handler;
@@ -20,7 +20,7 @@ public class BinanceCrawlerTest implements TickListener {
 
     private final BinanceCrawler crawler = new BinanceCrawler(symbol, interval, this);
 
-    private TickDTO tickReceived;
+    private TickPackage tickReceived;
 
     @Test
     public void whenTickDispatched_thenHandleTick() {
@@ -34,7 +34,7 @@ public class BinanceCrawlerTest implements TickListener {
     }
 
     @Handler
-    public void handleTick(TickDTO tickDTO) {
-        this.tickReceived = tickDTO;
+    public void handleTick(TickPackage tickPackage) {
+        this.tickReceived = tickPackage;
     }
 }

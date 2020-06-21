@@ -6,7 +6,7 @@ import com.binance.api.client.domain.event.CandlestickEvent;
 import de.ginisolutions.trader.common.market.CrawlerImpl;
 import de.ginisolutions.trader.common.messaging.TickListener;
 import de.ginisolutions.trader.common.messaging.TickPublisher;
-import de.ginisolutions.trader.history.domain.TickDTO;
+import de.ginisolutions.trader.history.domain.TickPackage;
 import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
 import de.ginisolutions.trader.history.domain.enumeration.MARKET;
 import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
@@ -53,7 +53,7 @@ public class BinanceCrawler implements CrawlerImpl {
         // Obtain candlesticks in real-time
         this.closeable = webSocket.onCandlestickEvent(symbol.getNameLower(), interval.getBinanceInterval(), (CandlestickEvent event) -> {
             LOGGER.debug("New Tick {}", event.toString());
-            final TickDTO tickDTO = new TickDTO(
+            final TickPackage tickPackage = new TickPackage(
                     market,
                     symbol,
                     interval,
@@ -67,8 +67,8 @@ public class BinanceCrawler implements CrawlerImpl {
                     Double.valueOf(event.getVolume()),
                     event.getBarFinal()
             );
-            this.publisher.publishTick(tickDTO);
-            LOGGER.debug(tickDTO.toString());
+            this.publisher.publishTick(tickPackage);
+            LOGGER.debug(tickPackage.toString());
         });
     }
 

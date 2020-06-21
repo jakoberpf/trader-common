@@ -2,7 +2,7 @@ package de.ginisolutions.trader.common.market.utils;
 
 import com.binance.api.client.domain.market.Candlestick;
 import de.ginisolutions.trader.history.domain.Tick;
-import de.ginisolutions.trader.history.domain.TickDTO;
+import de.ginisolutions.trader.history.domain.TickPackage;
 import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
 import de.ginisolutions.trader.history.domain.enumeration.MARKET;
 import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
@@ -33,8 +33,8 @@ public class TickConverter {
      * @param candlestick
      * @return
      */
-    public static TickDTO entity2dto(@NotNull Candlestick candlestick, @NotNull MARKET market, @NotNull SYMBOL symbol, @NotNull INTERVAL interval, @NotNull boolean isFinal) {
-        return new TickDTO(
+    public static TickPackage entity2dto(@NotNull Candlestick candlestick, @NotNull MARKET market, @NotNull SYMBOL symbol, @NotNull INTERVAL interval, @NotNull boolean isFinal) {
+        return new TickPackage(
                 market, symbol, interval,
                 candlestick.getOpenTime(),
                 candlestick.getOpenTime(),

@@ -24,7 +24,7 @@ public class CommodityChannelIndexStrategy {
     private static final Logger logger = LoggerFactory.getLogger(CommodityChannelIndexStrategy.class);
 
     public static Strategy buildStrategy(BarSeries series, ParameterCommodityChannelIndex parameterCommodityChannelIndex) {
-        logger.info("Building Commodity Channel Index Correction Strategy");
+        logger.debug("Building Commodity Channel Index Correction Strategy {}", parameterCommodityChannelIndex);
         if (series == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
@@ -44,7 +44,7 @@ public class CommodityChannelIndexStrategy {
 
         strategy.setUnstablePeriod(parameterCommodityChannelIndex.getUnstablePeriod());
 
-        logger.info("Building Commodity Channel Index Correction Strategy finished");
+        logger.debug("Finished building Commodity Channel Index Correction Strategy {}", parameterCommodityChannelIndex);
         return strategy;
     }
 }

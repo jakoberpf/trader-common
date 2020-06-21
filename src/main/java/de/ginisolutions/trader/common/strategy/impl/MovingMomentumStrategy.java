@@ -17,7 +17,7 @@ import org.ta4j.core.trading.rules.OverIndicatorRule;
 import org.ta4j.core.trading.rules.UnderIndicatorRule;
 
 /**
- * Moving Momentum Trading (MMT) strategy.
+ * Moving Momentum (MM) strategy.
  *
  * @see <a href=
  * "http://stockcharts.com/help/doku.php?id=chart_school:trading_strategies:moving_momentum">
@@ -28,7 +28,7 @@ public class MovingMomentumStrategy {
     private static final Logger logger = LoggerFactory.getLogger(MovingMomentumStrategy.class);
 
     public static Strategy buildStrategy(BarSeries series, ParameterMovingMomentum parameterMovingMomentum) {
-        logger.info("Building Moving Momentum Strategy");
+        logger.debug("Building Moving Momentum Strategy {}", parameterMovingMomentum);
         if (series == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
@@ -57,7 +57,7 @@ public class MovingMomentumStrategy {
                 .and(new CrossedUpIndicatorRule(stochasticOscillK, parameterMovingMomentum.getThreshold())) // Signal 1
                 .and(new UnderIndicatorRule(macd, emaMacd)); // Signal 2
 
-        logger.info("Building Moving Momentum Strategy finished");
+        logger.debug("Building Moving Momentum Strategy finished {}", parameterMovingMomentum);
         return new BaseStrategy(entryRule, exitRule);
     }
 }

@@ -6,7 +6,7 @@ import com.binance.api.client.domain.general.*;
 import com.binance.api.client.domain.market.Candlestick;
 import de.ginisolutions.trader.common.market.MarketImpl;
 import de.ginisolutions.trader.common.market.utils.TickConverter;
-import de.ginisolutions.trader.history.domain.TickDTO;
+import de.ginisolutions.trader.history.domain.TickPackage;
 import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
 import de.ginisolutions.trader.history.domain.enumeration.MARKET;
 import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
@@ -82,9 +82,9 @@ public class BinanceMarket implements MarketImpl {
      * @return
      */
     @Override
-    public List<TickDTO> getCandlesticks(@NotNull SYMBOL symbol, @NotNull INTERVAL interval) {
+    public List<TickPackage> getCandlesticks(@NotNull SYMBOL symbol, @NotNull INTERVAL interval) {
         List<Candlestick> candlesticks = client.getCandlestickBars(symbol.getNameUpper(), interval.getBinanceInterval());
-        List<TickDTO> ticks = new ArrayList<>();
+        List<TickPackage> ticks = new ArrayList<>();
         for (Candlestick stick : candlesticks) {
             ticks.add(TickConverter.entity2dto(stick, BINANCE, symbol, interval, true));
         }

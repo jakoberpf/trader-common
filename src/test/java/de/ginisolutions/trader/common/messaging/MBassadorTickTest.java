@@ -1,6 +1,6 @@
 package de.ginisolutions.trader.common.messaging;
 
-import de.ginisolutions.trader.history.domain.TickDTO;
+import de.ginisolutions.trader.history.domain.TickPackage;
 import net.engio.mbassy.bus.MBassador;
 import net.engio.mbassy.listener.Handler;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MBassadorTickTest {
 
-    private final MBassador<TickDTO> dispatcher = new MBassador<>();
+    private final MBassador<TickPackage> dispatcher = new MBassador<>();
 
-    private static final TickDTO tickSend = new TickDTO(BINANCE, BTCUSDT, ONE_MINUTE, 1591529802383L, 1591529760000L, 1591529819999L, 9596.08, 9600.02, 9602.17, 9596.08, 10.992936, false);
+    private static final TickPackage tickSend = new TickPackage(BINANCE, BTCUSDT, ONE_MINUTE, 1591529802383L, 1591529760000L, 1591529819999L, 9596.08, 9600.02, 9602.17, 9596.08, 10.992936, false);
 
-    private TickDTO tickReceived;
+    private TickPackage tickReceived;
 
     @BeforeEach
     public void prepareTests() {
@@ -37,8 +37,8 @@ public class MBassadorTickTest {
     }
 
     @Handler
-    public void handleTick(TickDTO tickDTO) {
-        tickReceived = tickDTO;
+    public void handleTick(TickPackage tickPackage) {
+        tickReceived = tickPackage;
     }
 
 }
