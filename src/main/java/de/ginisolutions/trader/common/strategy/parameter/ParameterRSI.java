@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotBlank;
 
-public class ParameterRelativeStrengthIndex implements StrategyParameter {
+public class ParameterRSI implements StrategyParameter {
 
     @NotBlank
     private int SMAshortBars;
@@ -23,10 +23,10 @@ public class ParameterRelativeStrengthIndex implements StrategyParameter {
     @NotBlank
     private int cupIthreshold;
 
-    public ParameterRelativeStrengthIndex() {
+    public ParameterRSI() {
     }
 
-    public ParameterRelativeStrengthIndex(int SMAshortBars, int SMAlongBars, int RSIbars, int cdownIthreshold, int cupIthreshold) {
+    public ParameterRSI(int SMAshortBars, int SMAlongBars, int RSIbars, int cdownIthreshold, int cupIthreshold) {
         this.SMAshortBars = SMAshortBars;
         this.SMAlongBars = SMAlongBars;
         this.RSIbars = RSIbars;
@@ -94,9 +94,9 @@ public class ParameterRelativeStrengthIndex implements StrategyParameter {
     public boolean equals(Object o) {
         if (this == o) return true;
 
-        if (!(o instanceof ParameterRelativeStrengthIndex)) return false;
+        if (!(o instanceof ParameterRSI)) return false;
 
-        ParameterRelativeStrengthIndex that = (ParameterRelativeStrengthIndex) o;
+        ParameterRSI that = (ParameterRSI) o;
 
         return new EqualsBuilder()
                 .append(getSMAshortBars(), that.getSMAshortBars())

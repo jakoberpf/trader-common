@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotBlank;
 
-public class ParameterCommodityChannelIndex implements StrategyParameter {
+public class ParameterCCI implements StrategyParameter {
 
     @NotBlank
     private int CCIlong;
@@ -23,10 +23,10 @@ public class ParameterCommodityChannelIndex implements StrategyParameter {
     @NotBlank
     private int unstablePeriod;
 
-    public ParameterCommodityChannelIndex() {
+    public ParameterCCI() {
     }
 
-    public ParameterCommodityChannelIndex(int CCIlong, int CCIshort, int plus, int minus, int unstablePeriod) {
+    public ParameterCCI(int CCIlong, int CCIshort, int plus, int minus, int unstablePeriod) {
         this.CCIlong = CCIlong;
         this.CCIshort = CCIshort;
         this.plus = plus;
@@ -94,9 +94,9 @@ public class ParameterCommodityChannelIndex implements StrategyParameter {
     public boolean equals(Object o) {
         if (this == o) return true;
 
-        if (!(o instanceof ParameterCommodityChannelIndex)) return false;
+        if (!(o instanceof ParameterCCI)) return false;
 
-        ParameterCommodityChannelIndex that = (ParameterCommodityChannelIndex) o;
+        ParameterCCI that = (ParameterCCI) o;
 
         return new EqualsBuilder()
                 .append(getCCIlong(), that.getCCIlong())

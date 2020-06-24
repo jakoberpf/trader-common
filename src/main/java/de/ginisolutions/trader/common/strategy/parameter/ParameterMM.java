@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotBlank;
 
-public class ParameterMovingMomentum implements StrategyParameter {
+public class ParameterMM implements StrategyParameter {
     @NotBlank
     private int shortEmaBars;
 
@@ -28,10 +28,10 @@ public class ParameterMovingMomentum implements StrategyParameter {
     @NotBlank
     private int threshold;
 
-    public ParameterMovingMomentum() {
+    public ParameterMM() {
     }
 
-    public ParameterMovingMomentum(int shortEmaBars, int longEmaBars, int oscillatorBars, int MACDshortBars, int MACDlongBars, int EMAbars, int threshold) {
+    public ParameterMM(int shortEmaBars, int longEmaBars, int oscillatorBars, int MACDshortBars, int MACDlongBars, int EMAbars, int threshold) {
         this.shortEmaBars = shortEmaBars;
         this.longEmaBars = longEmaBars;
         this.oscillatorBars = oscillatorBars;
@@ -119,9 +119,9 @@ public class ParameterMovingMomentum implements StrategyParameter {
     public boolean equals(Object o) {
         if (this == o) return true;
 
-        if (!(o instanceof ParameterMovingMomentum)) return false;
+        if (!(o instanceof ParameterMM)) return false;
 
-        ParameterMovingMomentum that = (ParameterMovingMomentum) o;
+        ParameterMM that = (ParameterMM) o;
 
         return new EqualsBuilder()
                 .append(getShortEmaBars(), that.getShortEmaBars())
