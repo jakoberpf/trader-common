@@ -4,5 +4,6 @@ public enum STRATEGY {
     SAMPLE_ENUM,
     RSI,
     CCI,
-    MM
+    MM,
+    DEVELOPMENT
 }

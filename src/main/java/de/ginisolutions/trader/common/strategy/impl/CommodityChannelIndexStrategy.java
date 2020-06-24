@@ -1,6 +1,6 @@
 package de.ginisolutions.trader.common.strategy.impl;
 
-import de.ginisolutions.trader.common.strategy.parameter.ParameterCommodityChannelIndex;
+import de.ginisolutions.trader.common.strategy.parameter.ParameterCCI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.ta4j.core.BarSeries;
@@ -23,16 +23,15 @@ public class CommodityChannelIndexStrategy {
 
     private static final Logger logger = LoggerFactory.getLogger(CommodityChannelIndexStrategy.class);
 
-    public static Strategy buildStrategy(BarSeries series, ParameterCommodityChannelIndex parameterCommodityChannelIndex) {
-        logger.debug("Building Commodity Channel Index Correction Strategy {}", parameterCommodityChannelIndex);
+    public static Strategy buildStrategy(BarSeries series, ParameterCCI parameterCCI) {
         if (series == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
 
-        CCIIndicator longCci = new CCIIndicator(series, parameterCommodityChannelIndex.getCCIlong());
-        CCIIndicator shortCci = new CCIIndicator(series, parameterCommodityChannelIndex.getCCIshort());
-        Num plus100 = series.numOf(parameterCommodityChannelIndex.getPlus());
-        Num minus100 = series.numOf(parameterCommodityChannelIndex.getMinus());
+        CCIIndicator longCci = new CCIIndicator(series, parameterCCI.getCCIlong());
+        CCIIndicator shortCci = new CCIIndicator(series, parameterCCI.getCCIshort());
+        Num plus100 = series.numOf(parameterCCI.getPlus());
+        Num minus100 = series.numOf(parameterCCI.getMinus());
 
         Rule entryRule = new OverIndicatorRule(longCci, plus100) // Bull trend
                 .and(new UnderIndicatorRule(shortCci, minus100)); // Signal
@@ -42,9 +41,7 @@ public class CommodityChannelIndexStrategy {
 
         Strategy strategy = new BaseStrategy(entryRule, exitRule);
 
-        strategy.setUnstablePeriod(parameterCommodityChannelIndex.getUnstablePeriod());
-
-        logger.debug("Finished building Commodity Channel Index Correction Strategy {}", parameterCommodityChannelIndex);
+        strategy.setUnstablePeriod(parameterCCI.getUnstablePeriod());
         return strategy;
     }
 }

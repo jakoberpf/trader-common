@@ -1,6 +1,6 @@
 package de.ginisolutions.trader.common.strategy.impl;
 
-import de.ginisolutions.trader.common.strategy.parameter.ParameterMovingMomentum;
+import de.ginisolutions.trader.common.strategy.parameter.ParameterMM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.ta4j.core.BarSeries;
@@ -27,8 +27,7 @@ public class MovingMomentumStrategy {
 
     private static final Logger logger = LoggerFactory.getLogger(MovingMomentumStrategy.class);
 
-    public static Strategy buildStrategy(BarSeries series, ParameterMovingMomentum parameterMovingMomentum) {
-        logger.debug("Building Moving Momentum Strategy {}", parameterMovingMomentum);
+    public static Strategy buildStrategy(BarSeries series, ParameterMM parameterMM) {
         if (series == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
@@ -39,25 +38,24 @@ public class MovingMomentumStrategy {
         // moving average.
         // The bias is bearish when the shorter-moving average moves below the longer
         // moving average.
-        EMAIndicator shortEma = new EMAIndicator(closePrice, parameterMovingMomentum.getShortEmaBars());
-        EMAIndicator longEma = new EMAIndicator(closePrice, parameterMovingMomentum.getLongEmaBars());
+        EMAIndicator shortEma = new EMAIndicator(closePrice, parameterMM.getShortEmaBars());
+        EMAIndicator longEma = new EMAIndicator(closePrice, parameterMM.getLongEmaBars());
 
-        StochasticOscillatorKIndicator stochasticOscillK = new StochasticOscillatorKIndicator(series, parameterMovingMomentum.getOscillatorBars());
+        StochasticOscillatorKIndicator stochasticOscillK = new StochasticOscillatorKIndicator(series, parameterMM.getOscillatorBars());
 
-        MACDIndicator macd = new MACDIndicator(closePrice, parameterMovingMomentum.getMACDshortBars(), parameterMovingMomentum.getMACDlongBars());
-        EMAIndicator emaMacd = new EMAIndicator(macd, parameterMovingMomentum.getEMAbars());
+        MACDIndicator macd = new MACDIndicator(closePrice, parameterMM.getMACDshortBars(), parameterMM.getMACDlongBars());
+        EMAIndicator emaMacd = new EMAIndicator(macd, parameterMM.getEMAbars());
 
         // Entry rule
         Rule entryRule = new OverIndicatorRule(shortEma, longEma) // Trend
-                .and(new CrossedDownIndicatorRule(stochasticOscillK, parameterMovingMomentum.getThreshold())) // Signal 1
+                .and(new CrossedDownIndicatorRule(stochasticOscillK, parameterMM.getThreshold())) // Signal 1
                 .and(new OverIndicatorRule(macd, emaMacd)); // Signal 2
 
         // Exit rule
         Rule exitRule = new UnderIndicatorRule(shortEma, longEma) // Trend
-                .and(new CrossedUpIndicatorRule(stochasticOscillK, parameterMovingMomentum.getThreshold())) // Signal 1
+                .and(new CrossedUpIndicatorRule(stochasticOscillK, parameterMM.getThreshold())) // Signal 1
                 .and(new UnderIndicatorRule(macd, emaMacd)); // Signal 2
 
-        logger.debug("Building Moving Momentum Strategy finished {}", parameterMovingMomentum);
         return new BaseStrategy(entryRule, exitRule);
     }
 }
