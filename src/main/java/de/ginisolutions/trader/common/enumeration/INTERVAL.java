@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.history.domain.enumeration;
+package de.ginisolutions.trader.common.enumeration;
 
 import com.binance.api.client.domain.market.CandlestickInterval;
 

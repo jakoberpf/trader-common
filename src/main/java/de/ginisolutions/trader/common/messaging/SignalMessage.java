@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.trading.messaging;
+package de.ginisolutions.trader.common.messaging;
 
 import de.ginisolutions.trader.common.enumeration.INTERVAL;
 import de.ginisolutions.trader.common.enumeration.MARKET;

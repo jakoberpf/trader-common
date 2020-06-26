@@ -1,11 +1,12 @@
-package de.ginisolutions.trader.trading.messaging;
+package de.ginisolutions.trader.common.messaging;
 
 import net.engio.mbassy.bus.MBassador;
 import net.engio.mbassy.bus.config.IBusConfiguration;
+import net.engio.mbassy.bus.error.PublicationError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SignalPublisher {
+public class SignalPublisher implements BasePublisher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SignalPublisher.class);
 
@@ -58,5 +59,10 @@ public class SignalPublisher {
      */
     private void publishSignal(SignalMessage signalMessage) {
         this.bus.post(signalMessage).now();
+    }
+
+    @Override
+    public void handleError(PublicationError error) {
+        LOGGER.error(error.getMessage());
     }
 }

@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.history.domain.enumeration;
+package de.ginisolutions.trader.common.enumeration;
 
 public enum MARKET {
     /**

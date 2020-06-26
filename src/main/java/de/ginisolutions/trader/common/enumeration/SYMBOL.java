@@ -1,9 +1,7 @@
-package de.ginisolutions.trader.history.domain.enumeration;
+package de.ginisolutions.trader.common.enumeration;
 
-import java.util.Currency;
-
-import static de.ginisolutions.trader.history.domain.enumeration.CURRENCY.*;
-import static de.ginisolutions.trader.history.domain.enumeration.CURRENCY.LTC;
+import static de.ginisolutions.trader.common.enumeration.CURRENCY.*;
+import static de.ginisolutions.trader.common.enumeration.CURRENCY.LTC;
 
 /**
  * The Symbol enumeration.
@@ -13,6 +11,7 @@ public enum SYMBOL {
      * Crypto Symbols
      */
     BTCUSDT("btcusdt", "BTCUSDT", BTC, USDT, ""),
+    BTCEUR("btceur", "BTCEUR", BTC, EUR, ""),
     LTCUSDT("ltcusdt", "LTCUSDT", LTC, USDT, ""),
     ETHUSDT("ethusdt", "ETHUSDT", ETH, USDT, "");
     /**

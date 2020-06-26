@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.trading.domain.enumeration;
+package de.ginisolutions.trader.common.enumeration;
 
 public enum ORDER {
     BUY,

@@ -1,9 +1,16 @@
-package de.ginisolutions.trader.trading.domain.enumeration;
+package de.ginisolutions.trader.common.enumeration;
 
 public enum STRATEGY {
-    SAMPLE_ENUM,
-    RSI,
-    CCI,
-    MM,
-    DEVELOPMENT
+    ADX(""),
+    CCI(""),
+    GE(""),
+    MACD_RSI(""),
+    MM(""),
+    RSI("");
+
+    private final String description;
+
+    STRATEGY(String description) {
+        this.description = description;
+    }
 }

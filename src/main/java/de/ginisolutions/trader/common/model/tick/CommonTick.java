@@ -6,7 +6,7 @@ import de.ginisolutions.trader.common.enumeration.SYMBOL;
 
 import javax.validation.constraints.NotNull;
 
-public class TickDTO {
+public class CommonTick {
 
     @NotNull
     private final MARKET market;
@@ -33,7 +33,7 @@ public class TickDTO {
     @NotNull
     private final boolean isFinal;
 
-    public TickDTO(@NotNull MARKET market, @NotNull SYMBOL symbol, @NotNull INTERVAL interval, @NotNull Long eventTime, @NotNull Long openTime, @NotNull Long closeTime, @NotNull Number open, @NotNull Number close, @NotNull Number high, @NotNull Number low, @NotNull Number volume, @NotNull boolean isFinal) {
+    public CommonTick(@NotNull MARKET market, @NotNull SYMBOL symbol, @NotNull INTERVAL interval, @NotNull Long eventTime, @NotNull Long openTime, @NotNull Long closeTime, @NotNull Number open, @NotNull Number close, @NotNull Number high, @NotNull Number low, @NotNull Number volume, @NotNull boolean isFinal) {
         this.market = market;
         this.symbol = symbol;
         this.interval = interval;

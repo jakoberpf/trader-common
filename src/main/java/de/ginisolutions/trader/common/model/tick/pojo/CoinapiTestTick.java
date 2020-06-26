@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.learning.calibration.model.coinapi;
+package de.ginisolutions.trader.common.model.tick.pojo;
 
 public class CoinapiTestTick {
 

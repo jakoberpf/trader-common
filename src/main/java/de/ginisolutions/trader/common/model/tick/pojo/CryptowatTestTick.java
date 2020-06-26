@@ -1,4 +1,4 @@
-package de.ginisolutions.trader.learning.calibration.model.cryptowat;
+package de.ginisolutions.trader.common.model.tick.pojo;
 
 /**
  * From https://docs.cryptowat.ch/rest-api/markets/ohlc

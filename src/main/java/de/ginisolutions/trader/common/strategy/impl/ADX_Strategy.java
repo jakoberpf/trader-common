@@ -18,28 +18,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ADX indicator based strategy
+ * Average Directional Index (ADX) Indicator based strategy.
  *
  * @see <a href=
  * "http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx">
  * http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:average_directional_index_adx</a>
  */
-public class ADXStrategy {
+public class ADX_Strategy {
 
     /**
-     * @param series a bar series
-     * @return an adx indicator based strategy
+     * @param series
+     * @param parameterMap
+     * @return
      */
-    public static Strategy buildStrategy(BarSeries series, Map<String, Integer> parameterMap) {
+    public static Strategy buildStrategy(BarSeries series, Map<String, Double> parameterMap) {
 
         if (series == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
 
         final ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(series);
-        final SMAIndicator smaIndicator = new SMAIndicator(closePriceIndicator, parameterMap.get("SMA"));
+        final SMAIndicator smaIndicator = new SMAIndicator(closePriceIndicator, parameterMap.get("SMA").intValue());
 
-        final int adxBarCount = parameterMap.get("ADX");
+        final int adxBarCount = parameterMap.get("ADX").intValue();
         final ADXIndicator adxIndicator = new ADXIndicator(series, adxBarCount);
         final OverIndicatorRule adxOver20Rule = new OverIndicatorRule(adxIndicator, parameterMap.get("OverThreshold"));
 
@@ -62,13 +63,13 @@ public class ADXStrategy {
      * ADX: ~14
      * OverThreshold: ~20
      *
-     * @return an default parameter map for MACD_RSI
+     * @return an default parameter map for ADX
      */
-    public static Map<String, Integer> buildParameterMap() {
-        final Map<String, Integer> parameterMap = new HashMap<>();
-        parameterMap.put("SMA", 50);
-        parameterMap.put("ADX", 14);
-        parameterMap.put("OverThreshold", 20);
+    public static Map<String, Double> buildDefaultParameterMap() {
+        final Map<String, Double> parameterMap = new HashMap<>();
+        parameterMap.put("SMA", 50D);
+        parameterMap.put("ADX", 14D);
+        parameterMap.put("OverThreshold", 20D);
         return parameterMap;
     }
 }

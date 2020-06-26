@@ -1,6 +1,5 @@
-package de.ginisolutions.trader.trading.messaging;
+package de.ginisolutions.trader.common.messaging;
 
-import de.ginisolutions.trader.common.messaging.BaseListener;
 import net.engio.mbassy.listener.Listener;
 import net.engio.mbassy.listener.References;
 
