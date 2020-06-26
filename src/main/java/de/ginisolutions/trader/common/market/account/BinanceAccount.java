@@ -6,9 +6,9 @@ import com.binance.api.client.domain.account.Account;
 import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.account.Trade;
 import de.ginisolutions.trader.common.market.AccountImpl;
-import de.ginisolutions.trader.history.domain.enumeration.MARKET;
-import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
-import de.ginisolutions.trader.trading.domain.enumeration.ORDER;
+import de.ginisolutions.trader.common.enumeration.MARKET;
+import de.ginisolutions.trader.common.enumeration.SYMBOL;
+import de.ginisolutions.trader.common.enumeration.ORDER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,14 +16,14 @@ import java.util.List;
 
 import static com.binance.api.client.domain.account.NewOrder.marketBuy;
 import static com.binance.api.client.domain.account.NewOrder.marketSell;
-import static de.ginisolutions.trader.history.domain.enumeration.MARKET.BINANCE;
+import static de.ginisolutions.trader.common.enumeration.MARKET.BINANCE;
 
 /**
  * TODO
  */
 public class BinanceAccount implements AccountImpl {
 
-    private static final Logger logger = LoggerFactory.getLogger(BinanceAccount.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BinanceAccount.class);
 
     private static final MARKET market = BINANCE;
 
@@ -73,16 +73,18 @@ public class BinanceAccount implements AccountImpl {
 //        System.out.println(newOrderResponse);
     }
 
-    public void getTrades(SYMBOL symbol) {
+    public List<Trade> getTrades(SYMBOL symbol) {
         // Get list of trades
         List<Trade> myTrades = client.getMyTrades(symbol.getNameLower());
         System.out.println(myTrades);
+        return myTrades;
     }
-//
-//    public AccountBalance getBalance() {
-//        // Get account balances
-//        Account account = client.getAccount(60_000L, System.currentTimeMillis());
-//        final AccountBalance accountBalance = new AccountBalance(Binance, 0.0);
+
+    public Account getBalance() {
+        // Get account balances
+        Account account = client.getAccount(60_000L, System.currentTimeMillis());
+        return account;
+//        final AccountBalance accountBalance = new AccountBalance(BINANCE, 0.0);
 //        account.getBalances().forEach(balance -> {
 //            if (CurrencyEnum.byCode(balance.getAsset()) != null)
 //                accountBalance.getBalances().put(
@@ -95,56 +97,50 @@ public class BinanceAccount implements AccountImpl {
 //                );
 //        });
 //        return accountBalance;
-//    }
+    }
 
     /**
      * TODO
+     *
      * @param symbol
      * @param amount
      * @param order
      */
-    public void makeOrder(SYMBOL symbol, double amount, ORDER order) {
-        final NewOrderResponse orderResponse;
+    public NewOrderResponse makeOrder(SYMBOL symbol, double amount, ORDER order) {
         switch (order) {
             case BUY:
-                orderResponse = client.newOrder(marketBuy(symbol.getNameUpper(), doubleToString(amount)));
-                System.out.println(orderResponse.toString());
-                break;
+                return client.newOrder(marketBuy(symbol.getNameUpper(), doubleToString(amount)));
             case SELL:
-                orderResponse = client.newOrder(marketSell(symbol.getNameUpper(), doubleToString(amount)));
-                System.out.println(orderResponse.toString());
-                break;
+                return client.newOrder(marketSell(symbol.getNameUpper(), doubleToString(amount)));
             default:
                 throw new IllegalArgumentException("Argument " + order + " is not 'BUY' or 'SELL'");
         }
     }
 
     /**
-     *
      * @param symbol
      * @param amount
      * @param order
      * @param isTest
      */
-    public void makeOrder(SYMBOL symbol, double amount, ORDER order, boolean isTest) {
+    public NewOrderResponse makeOrder(SYMBOL symbol, double amount, ORDER order, boolean isTest) {
         if (isTest) {
             switch (order) {
                 case BUY:
                     client.newOrderTest(marketBuy(symbol.getNameUpper(), doubleToString(amount)));
-                    break;
+                    return new NewOrderResponse();
                 case SELL:
                     client.newOrderTest(marketSell(symbol.getNameUpper(), doubleToString(amount)));
-                    break;
+                    return new NewOrderResponse();
                 default:
                     throw new IllegalArgumentException("Argument " + order + " is not 'BUY' or 'SELL'");
             }
         } else {
-            this.makeOrder(symbol, amount, order);
+            return this.makeOrder(symbol, amount, order);
         }
     }
 
     /**
-     *
      * @param number is the double value to convert to string
      * @return
      */

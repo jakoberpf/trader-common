@@ -1,6 +1,6 @@
 package de.ginisolutions.trader.common.strategy.parameter;
 
-import de.ginisolutions.trader.trading.domain.enumeration.STRATEGY;
+import de.ginisolutions.trader.common.enumeration.STRATEGY;
 
 /**
  * The interface for a strategy parameter set. It contains the type of strategy

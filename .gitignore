@@ -4,3 +4,4 @@ trader-domain.iml
 .idea
 .settings
 target
+*.iml

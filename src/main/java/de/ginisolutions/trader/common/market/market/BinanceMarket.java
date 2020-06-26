@@ -6,10 +6,10 @@ import com.binance.api.client.domain.general.*;
 import com.binance.api.client.domain.market.Candlestick;
 import de.ginisolutions.trader.common.market.MarketImpl;
 import de.ginisolutions.trader.common.market.utils.TickConverter;
-import de.ginisolutions.trader.history.domain.TickPackage;
-import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
-import de.ginisolutions.trader.history.domain.enumeration.MARKET;
-import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
+import de.ginisolutions.trader.common.model.tick.CommonTick;
+import de.ginisolutions.trader.common.enumeration.INTERVAL;
+import de.ginisolutions.trader.common.enumeration.MARKET;
+import de.ginisolutions.trader.common.enumeration.SYMBOL;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.ginisolutions.trader.history.domain.enumeration.MARKET.BINANCE;
+import static de.ginisolutions.trader.common.enumeration.MARKET.BINANCE;
 
 /**
  *
@@ -82,9 +82,9 @@ public class BinanceMarket implements MarketImpl {
      * @return
      */
     @Override
-    public List<TickPackage> getCandlesticks(@NotNull SYMBOL symbol, @NotNull INTERVAL interval) {
+    public List<CommonTick> getCandlesticks(@NotNull SYMBOL symbol, @NotNull INTERVAL interval) {
         List<Candlestick> candlesticks = client.getCandlestickBars(symbol.getNameUpper(), interval.getBinanceInterval());
-        List<TickPackage> ticks = new ArrayList<>();
+        List<CommonTick> ticks = new ArrayList<>();
         for (Candlestick stick : candlesticks) {
             ticks.add(TickConverter.entity2dto(stick, BINANCE, symbol, interval, true));
         }

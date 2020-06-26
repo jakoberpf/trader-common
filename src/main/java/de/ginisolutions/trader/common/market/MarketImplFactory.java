@@ -1,7 +1,7 @@
 package de.ginisolutions.trader.common.market;
 
 import de.ginisolutions.trader.common.market.market.BinanceMarket;
-import de.ginisolutions.trader.history.domain.enumeration.MARKET;
+import de.ginisolutions.trader.common.enumeration.MARKET;
 import org.apache.commons.lang3.NotImplementedException;
 
 public class MarketImplFactory {

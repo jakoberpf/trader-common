@@ -3,9 +3,9 @@ package de.ginisolutions.trader.common.market.account;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static de.ginisolutions.trader.history.domain.enumeration.SYMBOL.BTCUSDT;
-import static de.ginisolutions.trader.trading.domain.enumeration.ORDER.BUY;
-import static de.ginisolutions.trader.trading.domain.enumeration.ORDER.SELL;
+import static de.ginisolutions.trader.common.enumeration.SYMBOL.BTCUSDT;
+import static de.ginisolutions.trader.common.enumeration.ORDER.BUY;
+import static de.ginisolutions.trader.common.enumeration.ORDER.SELL;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class BinanceAccountTest {

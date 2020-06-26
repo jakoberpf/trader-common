@@ -2,11 +2,10 @@ package de.ginisolutions.trader.common.market;
 
 import de.ginisolutions.trader.common.market.crawler.BinanceCrawler;
 
-import de.ginisolutions.trader.common.messaging.BaseListener;
 import de.ginisolutions.trader.common.messaging.TickListener;
-import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
-import de.ginisolutions.trader.history.domain.enumeration.MARKET;
-import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
+import de.ginisolutions.trader.common.enumeration.INTERVAL;
+import de.ginisolutions.trader.common.enumeration.MARKET;
+import de.ginisolutions.trader.common.enumeration.SYMBOL;
 import org.apache.commons.lang3.NotImplementedException;
 
 public class CrawlerImplFactory {

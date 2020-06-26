@@ -23,9 +23,7 @@ import org.ta4j.core.trading.rules.UnderIndicatorRule;
  * "http://stockcharts.com/help/doku.php?id=chart_school:trading_strategies:moving_momentum">
  * http://stockcharts.com/help/doku.php?id=chart_school:trading_strategies:moving_momentum</a>
  */
-public class MovingMomentumStrategy {
-
-    private static final Logger logger = LoggerFactory.getLogger(MovingMomentumStrategy.class);
+public class MMStrategy {
 
     public static Strategy buildStrategy(BarSeries series, ParameterMM parameterMM) {
         if (series == null) {

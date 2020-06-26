@@ -19,11 +19,15 @@ import org.ta4j.core.trading.rules.UnderIndicatorRule;
  * "https://school.stockcharts.com/doku.php?id=trading_strategies:cci_correction">
  * https://school.stockcharts.com/doku.php?id=trading_strategies:cci_correction</a>
  */
-public class CommodityChannelIndexStrategy {
+public class CCICStrategy {
 
-    private static final Logger logger = LoggerFactory.getLogger(CommodityChannelIndexStrategy.class);
-
+    /**
+     * @param series
+     * @param parameterCCI
+     * @return
+     */
     public static Strategy buildStrategy(BarSeries series, ParameterCCI parameterCCI) {
+
         if (series == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
@@ -39,9 +43,6 @@ public class CommodityChannelIndexStrategy {
         Rule exitRule = new UnderIndicatorRule(longCci, minus100) // Bear trend
                 .and(new OverIndicatorRule(shortCci, plus100)); // Signal
 
-        Strategy strategy = new BaseStrategy(entryRule, exitRule);
-
-        strategy.setUnstablePeriod(parameterCCI.getUnstablePeriod());
-        return strategy;
+        return new BaseStrategy("CCIC", entryRule, exitRule, parameterCCI.getUnstablePeriod());
     }
 }

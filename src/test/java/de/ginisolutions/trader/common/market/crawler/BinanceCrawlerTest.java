@@ -1,14 +1,14 @@
 package de.ginisolutions.trader.common.market.crawler;
 
 import de.ginisolutions.trader.common.messaging.TickListener;
-import de.ginisolutions.trader.history.domain.TickPackage;
-import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
-import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
+import de.ginisolutions.trader.common.model.tick.CommonTick;
+import de.ginisolutions.trader.common.enumeration.INTERVAL;
+import de.ginisolutions.trader.common.enumeration.SYMBOL;
 import net.engio.mbassy.listener.Handler;
 import org.junit.jupiter.api.Test;
 
-import static de.ginisolutions.trader.history.domain.enumeration.INTERVAL.ONE_MINUTE;
-import static de.ginisolutions.trader.history.domain.enumeration.SYMBOL.BTCUSDT;
+import static de.ginisolutions.trader.common.enumeration.INTERVAL.ONE_MINUTE;
+import static de.ginisolutions.trader.common.enumeration.SYMBOL.BTCUSDT;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -20,7 +20,7 @@ public class BinanceCrawlerTest implements TickListener {
 
     private final BinanceCrawler crawler = new BinanceCrawler(symbol, interval, this);
 
-    private TickPackage tickReceived;
+    private CommonTick tickReceived;
 
     @Test
     public void whenTickDispatched_thenHandleTick() {
@@ -34,7 +34,7 @@ public class BinanceCrawlerTest implements TickListener {
     }
 
     @Handler
-    public void handleTick(TickPackage tickPackage) {
-        this.tickReceived = tickPackage;
+    public void handleTick(CommonTick commonTick) {
+        this.tickReceived = commonTick;
     }
 }

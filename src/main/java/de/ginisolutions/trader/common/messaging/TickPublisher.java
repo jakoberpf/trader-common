@@ -1,9 +1,8 @@
 package de.ginisolutions.trader.common.messaging;
 
-import de.ginisolutions.trader.history.domain.TickPackage;
+import de.ginisolutions.trader.common.model.tick.CommonTick;
 import net.engio.mbassy.bus.IMessagePublication;
 import net.engio.mbassy.bus.MBassador;
-import net.engio.mbassy.bus.error.IPublicationErrorHandler;
 import net.engio.mbassy.bus.error.PublicationError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,11 +10,11 @@ import org.slf4j.LoggerFactory;
 /**
  *
  */
-public class TickPublisher implements IPublicationErrorHandler {
+public class TickPublisher implements BasePublisher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TickPublisher.class);
 
-    private final MBassador<TickPackage> bus;
+    private final MBassador<CommonTick> bus;
 
     public TickPublisher() {
         LOGGER.info("Constructing TickPublisher");
@@ -35,7 +34,7 @@ public class TickPublisher implements IPublicationErrorHandler {
      * @param async
      * @return
      */
-    public IMessagePublication publishTick(TickPackage tick, boolean async) {
+    public IMessagePublication publishTick(CommonTick tick, boolean async) {
         if (async) {
             return this.bus.post(tick).asynchronously();
         } else {
@@ -47,7 +46,7 @@ public class TickPublisher implements IPublicationErrorHandler {
      * @param tick
      * @return
      */
-    public IMessagePublication publishTick(TickPackage tick) {
+    public IMessagePublication publishTick(CommonTick tick) {
         return this.bus.post(tick).now();
     }
 

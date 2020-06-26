@@ -1,4 +1,6 @@
 package de.ginisolutions.trader.common.messaging;
 
-public interface BasePublisher {
+import net.engio.mbassy.bus.error.IPublicationErrorHandler;
+
+public interface BasePublisher extends IPublicationErrorHandler {
 }

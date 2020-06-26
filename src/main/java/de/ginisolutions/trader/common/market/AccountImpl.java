@@ -1,12 +1,19 @@
 package de.ginisolutions.trader.common.market;
 
-import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
-import de.ginisolutions.trader.trading.domain.enumeration.ORDER;
+import com.binance.api.client.domain.account.Account;
+import com.binance.api.client.domain.account.NewOrderResponse;
+import com.binance.api.client.domain.account.Trade;
+import de.ginisolutions.trader.common.enumeration.SYMBOL;
+import de.ginisolutions.trader.common.enumeration.ORDER;
+
+import java.util.List;
 
 public interface AccountImpl {
-    void getTrades(SYMBOL marketEnum);
+    List<Trade> getTrades(SYMBOL marketEnum);
 
-//    AccountBalance getBalance();
+    Account getBalance();
 
-    void makeOrder(SYMBOL symbol, double amount, ORDER order);
+    NewOrderResponse makeOrder(SYMBOL symbol, double amount, ORDER order);
+
+    NewOrderResponse makeOrder(SYMBOL symbol, double amount, ORDER order, boolean isTest);
 }

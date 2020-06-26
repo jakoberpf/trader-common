@@ -1,43 +1,91 @@
 package de.ginisolutions.trader.common.strategy;
 
-import de.ginisolutions.trader.common.strategy.impl.CommodityChannelIndexStrategy;
-import de.ginisolutions.trader.common.strategy.impl.MovingMomentumStrategy;
-import de.ginisolutions.trader.common.strategy.impl.DevelopmentStrategy;
-import de.ginisolutions.trader.common.strategy.impl.RelativeStrengthIndexStrategy;
-import de.ginisolutions.trader.common.strategy.parameter.*;
-import de.ginisolutions.trader.trading.domain.enumeration.STRATEGY;
+import de.ginisolutions.trader.common.strategy.impl.*;
+import de.ginisolutions.trader.common.enumeration.STRATEGY;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Strategy;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
 
 /**
- *
+ * @author <a href="mailto:contact@jakoberpf.de">Jakob Erpf</a>
  */
 public class StrategyFactory {
 
     /**
      * @param barSeries
-     * @param strategyEnum
-     * @param parameters
+     * @param strategy
+     * @param parameterMap
      * @return
      */
-    public static Strategy buildStrategy(@NotNull BarSeries barSeries, @NotNull STRATEGY strategyEnum, @NotNull StrategyParameter parameters) {
-        switch (strategyEnum) {
-            case RSI:
-                ParameterRSI parameterRSI = (ParameterRSI) parameters;
-                return RelativeStrengthIndexStrategy.buildStrategy(barSeries, parameterRSI);
-            case MM:
-                ParameterMM parameterMM = (ParameterMM) parameters;
-                return MovingMomentumStrategy.buildStrategy(barSeries, parameterMM);
+    public static Strategy buildStrategy(@NotNull BarSeries barSeries, @NotNull STRATEGY strategy, @NotNull Map<String, Double> parameterMap) {
+        switch (strategy) {
+            case ADX:
+                return ADX_Strategy.buildStrategy(barSeries, parameterMap);
             case CCI:
-                ParameterCCI parameterCCI = (ParameterCCI) parameters;
-                return CommodityChannelIndexStrategy.buildStrategy(barSeries, parameterCCI);
-            case DEVELOPMENT:
-                ParameterDevelopment parameterDevelopment = (ParameterDevelopment) parameters;
-                return DevelopmentStrategy.buildStrategy(barSeries, parameterDevelopment);
+                return CCIC_Strategy.buildStrategy(barSeries, parameterMap);
+            case GE:
+                return GE_Strategy.buildStrategy(barSeries, parameterMap);
+            case MACD_RSI:
+                return MACD_RSI_Strategy.buildStrategy(barSeries, parameterMap);
+            case MM:
+                return MM_Strategy.buildStrategy(barSeries, parameterMap);
+            case RSI:
+                return RSI_Strategy.buildStrategy(barSeries, parameterMap);
             default:
-                throw new IllegalArgumentException("Strategy " + strategyEnum + " not found");
+                throw new IllegalArgumentException("Strategy " + strategy + " not found");
+        }
+    }
+
+    /**
+     * @param strategy
+     * @return
+     */
+    public static Map<String, Double> buildDefaultParameterMap(@NotNull STRATEGY strategy) {
+        switch (strategy) {
+            case ADX:
+                return ADX_Strategy.buildDefaultParameterMap();
+            case CCI:
+                return CCIC_Strategy.buildDefaultParameterMap();
+            case GE:
+                return GE_Strategy.buildDefaultParameterMap();
+            case MACD_RSI:
+                return MACD_RSI_Strategy.buildDefaultParameterMap();
+            case MM:
+                return MM_Strategy.buildDefaultParameterMap();
+            case RSI:
+                return RSI_Strategy.buildDefaultParameterMap();
+            default:
+                throw new IllegalArgumentException("Strategy " + strategy + " not found");
+        }
+    }
+
+    /**
+     * @param strategy
+     * @return
+     */
+    public static List<Map<String, Double>> buildCalibrationParameterMapList(@NotNull STRATEGY strategy, Map<String, Double> parameterMap, Double range) {
+        switch (strategy) {
+            case ADX:
+//                return ADX_Strategy.buildCalibrationParameterMapList(parameterMap, range);
+                throw new IllegalArgumentException("Not yet implemented");
+            case CCI:
+//                return CCIC_Strategy.buildCalibrationParameterMapList(parameterMap, range);
+                throw new IllegalArgumentException("Not yet implemented");
+            case GE:
+//                return GE_Strategy.buildCalibrationParameterMapList(parameterMap, range);
+                throw new IllegalArgumentException("Not yet implemented");
+            case MACD_RSI:
+                return MACD_RSI_Strategy.buildCalibrationParameterMapList(parameterMap, range);
+            case MM:
+//                return MM_Strategy.buildCalibrationParameterMapList(parameterMap, range);
+                throw new IllegalArgumentException("Not yet implemented");
+            case RSI:
+                return RSI_Strategy.buildCalibrationParameterMapList(parameterMap, range);
+            default:
+                throw new IllegalArgumentException("Strategy " + strategy + " not found");
         }
     }
 }

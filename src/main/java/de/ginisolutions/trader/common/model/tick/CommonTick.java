@@ -1,12 +1,12 @@
-package de.ginisolutions.trader.history.domain;
+package de.ginisolutions.trader.common.model.tick;
 
-import de.ginisolutions.trader.history.domain.enumeration.INTERVAL;
-import de.ginisolutions.trader.history.domain.enumeration.MARKET;
-import de.ginisolutions.trader.history.domain.enumeration.SYMBOL;
+import de.ginisolutions.trader.common.enumeration.INTERVAL;
+import de.ginisolutions.trader.common.enumeration.MARKET;
+import de.ginisolutions.trader.common.enumeration.SYMBOL;
 
 import javax.validation.constraints.NotNull;
 
-public class TickPackage {
+public class TickDTO {
 
     @NotNull
     private final MARKET market;
@@ -33,7 +33,7 @@ public class TickPackage {
     @NotNull
     private final boolean isFinal;
 
-    public TickPackage(@NotNull MARKET market, @NotNull SYMBOL symbol, @NotNull INTERVAL interval, @NotNull Long eventTime, @NotNull Long openTime, @NotNull Long closeTime, @NotNull Number open, @NotNull Number close, @NotNull Number high, @NotNull Number low, @NotNull Number volume, @NotNull boolean isFinal) {
+    public TickDTO(@NotNull MARKET market, @NotNull SYMBOL symbol, @NotNull INTERVAL interval, @NotNull Long eventTime, @NotNull Long openTime, @NotNull Long closeTime, @NotNull Number open, @NotNull Number close, @NotNull Number high, @NotNull Number low, @NotNull Number volume, @NotNull boolean isFinal) {
         this.market = market;
         this.symbol = symbol;
         this.interval = interval;

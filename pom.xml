@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.ginisolutions.trader.domain</groupId>
-    <artifactId>trader-domain</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <groupId>de.ginisolutions.trader</groupId>
+    <artifactId>trader-common</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Trader Domain</name>
+    <name>Trader Common</name>
 
     <repositories>
     </repositories>
@@ -89,7 +89,19 @@
             <version>1.0.1</version>
         </dependency>
         <!--Market APIs-->
-
+        <!--For reading time series-->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0-M1</version>
+            <scope>test</scope>
+        </dependency>
+        <!--For reading time series-->
     </dependencies>
 
     <build>

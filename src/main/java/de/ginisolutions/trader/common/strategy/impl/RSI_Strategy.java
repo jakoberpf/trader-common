@@ -22,11 +22,16 @@ import org.ta4j.core.trading.rules.UnderIndicatorRule;
  * "https://school.stockcharts.com/doku.php?id=technical_indicators:rrg_relative_strength">
  * https://school.stockcharts.com/doku.php?id=technical_indicators:rrg_relative_strength</a>
  */
-public class RelativeStrengthIndexStrategy {
+public class RSIStrategy {
 
-    private static final Logger logger = LoggerFactory.getLogger(RelativeStrengthIndexStrategy.class);
-
+    /**
+     *
+     * @param barSeries
+     * @param parameterRSI
+     * @return
+     */
     public static Strategy buildStrategy(BarSeries barSeries, ParameterRSI parameterRSI) {
+
         if (barSeries == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
@@ -49,6 +54,7 @@ public class RelativeStrengthIndexStrategy {
         Rule exitRule = new UnderIndicatorRule(shortSma, longSma) // Trend
                 .and(new CrossedUpIndicatorRule(rsi, parameterRSI.getCupIthreshold())) // Signal 1
                 .and(new UnderIndicatorRule(shortSma, closePrice)); // Signal 2
-        return new BaseStrategy(entryRule, exitRule);
+
+        return new BaseStrategy("RSI", entryRule, exitRule);
     }
 }
