@@ -2,7 +2,7 @@ package de.ginisolutions.trader.common.enumeration;
 
 public enum STRATEGY {
     ADX(""),
-    CCI(""),
+    CCIC(""),
     GE(""),
     MACD_RSI(""),
     MM(""),

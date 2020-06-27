@@ -24,7 +24,7 @@ public class StrategyFactory {
         switch (strategy) {
             case ADX:
                 return ADX_Strategy.buildStrategy(barSeries, parameterMap);
-            case CCI:
+            case CCIC:
                 return CCIC_Strategy.buildStrategy(barSeries, parameterMap);
             case GE:
                 return GE_Strategy.buildStrategy(barSeries, parameterMap);
@@ -47,7 +47,7 @@ public class StrategyFactory {
         switch (strategy) {
             case ADX:
                 return ADX_Strategy.buildDefaultParameterMap();
-            case CCI:
+            case CCIC:
                 return CCIC_Strategy.buildDefaultParameterMap();
             case GE:
                 return GE_Strategy.buildDefaultParameterMap();
@@ -71,7 +71,7 @@ public class StrategyFactory {
             case ADX:
 //                return ADX_Strategy.buildCalibrationParameterMapList(parameterMap, range);
                 throw new IllegalArgumentException("Not yet implemented");
-            case CCI:
+            case CCIC:
 //                return CCIC_Strategy.buildCalibrationParameterMapList(parameterMap, range);
                 throw new IllegalArgumentException("Not yet implemented");
             case GE:

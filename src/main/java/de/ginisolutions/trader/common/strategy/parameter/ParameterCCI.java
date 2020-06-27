@@ -36,7 +36,7 @@ public class ParameterCCI implements StrategyParameter {
 
     @Override
     public STRATEGY getType() {
-        return STRATEGY.CCI;
+        return STRATEGY.CCIC;
     }
 
     public int getCCIlong() {
