@@ -58,7 +58,7 @@ public class MACD_RSI_Strategy {
         Rule entryRule = new OverIndicatorRule(SMA_short, SMA_long) // Trend
                 .and(new CrossedDownIndicatorRule(RSI, parameterMap.get("CrossDownThreshold"))) // Signal 1
                 .and(new OverIndicatorRule(SMA_short, closePriceIndicator)) // Signal 2
-                .and(new OverIndicatorRule(MACD, EMA4MACD)); // Signal 2 // Signal 3
+                .and(new OverIndicatorRule(MACD, EMA4MACD)); // Signal 3
 
         // Exit rule
         // The long-term trend is down when a security is below its 200-period SMA.

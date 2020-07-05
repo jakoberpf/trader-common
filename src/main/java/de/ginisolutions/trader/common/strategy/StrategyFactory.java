@@ -24,6 +24,10 @@ public class StrategyFactory {
         switch (strategy) {
             case ADX:
                 return ADX_Strategy.buildStrategy(barSeries, parameterMap);
+            case BBB:
+                return BBB_Strategy.buildStrategy(barSeries, parameterMap);
+            case BBB_MACD:
+                return BBB_MACD_Strategy.buildStrategy(barSeries, parameterMap);
             case CCIC:
                 return CCIC_Strategy.buildStrategy(barSeries, parameterMap);
             case GE:
@@ -47,6 +51,10 @@ public class StrategyFactory {
         switch (strategy) {
             case ADX:
                 return ADX_Strategy.buildDefaultParameterMap();
+            case BBB:
+                return BBB_Strategy.buildDefaultParameterMap();
+            case BBB_MACD:
+                return BBB_MACD_Strategy.buildDefaultParameterMap();
             case CCIC:
                 return CCIC_Strategy.buildDefaultParameterMap();
             case GE:

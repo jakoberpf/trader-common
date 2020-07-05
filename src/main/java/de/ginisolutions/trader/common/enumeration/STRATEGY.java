@@ -2,6 +2,8 @@ package de.ginisolutions.trader.common.enumeration;
 
 public enum STRATEGY {
     ADX(""),
+    BBB(""),
+    BBB_MACD(""),
     CCIC(""),
     GE(""),
     MACD_RSI(""),

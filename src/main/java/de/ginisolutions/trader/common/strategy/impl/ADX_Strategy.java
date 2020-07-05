@@ -27,25 +27,25 @@ import java.util.Map;
 public class ADX_Strategy {
 
     /**
-     * @param series
+     * @param barSeries
      * @param parameterMap
      * @return
      */
-    public static Strategy buildStrategy(BarSeries series, Map<String, Double> parameterMap) {
+    public static Strategy buildStrategy(BarSeries barSeries, Map<String, Double> parameterMap) {
 
-        if (series == null) {
+        if (barSeries == null) {
             throw new IllegalArgumentException("Series cannot be null");
         }
 
-        final ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(series);
+        final ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
         final SMAIndicator smaIndicator = new SMAIndicator(closePriceIndicator, parameterMap.get("SMA").intValue());
 
         final int adxBarCount = parameterMap.get("ADX").intValue();
-        final ADXIndicator adxIndicator = new ADXIndicator(series, adxBarCount);
+        final ADXIndicator adxIndicator = new ADXIndicator(barSeries, adxBarCount);
         final OverIndicatorRule adxOver20Rule = new OverIndicatorRule(adxIndicator, parameterMap.get("OverThreshold"));
 
-        final PlusDIIndicator plusDIIndicator = new PlusDIIndicator(series, adxBarCount);
-        final MinusDIIndicator minusDIIndicator = new MinusDIIndicator(series, adxBarCount);
+        final PlusDIIndicator plusDIIndicator = new PlusDIIndicator(barSeries, adxBarCount);
+        final MinusDIIndicator minusDIIndicator = new MinusDIIndicator(barSeries, adxBarCount);
 
         final Rule plusDICrossedUpMinusDI = new CrossedUpIndicatorRule(plusDIIndicator, minusDIIndicator);
         final Rule plusDICrossedDownMinusDI = new CrossedDownIndicatorRule(plusDIIndicator, minusDIIndicator);
